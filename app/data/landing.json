@@ -1,0 +1,348 @@
+{
+  "header": {
+    "logo": {
+      "text": "KATHIE'S KITCHEN",
+      "iconPath": "/images/logo.png"
+    },
+    "navLinks": [
+      { "label": "Home", "path": "/" },
+      { "label": "About Us", "path": "/about" },
+      { "label": "All Products", "path": "/products" },
+      { "label": "Contact Us", "path": "/contact" }
+    ],
+    "utilityLinks": [
+      { "type": "icon", "icon": "shopping-cart", "path": "/cart" },
+      { "type": "button", "label": "Sign In", "path": "/signin" }
+    ]
+  },
+  "heroSection": {
+    "headline": "Bringing home closer, one bite at a time",
+    "tagline": "Authentic Filipino flavors, crafted with love and delivered fresh to your doorstep.",
+    "ctaButton": {
+      "label": "SHOP NOW!",
+      "path": "/products"
+    },
+    "carouselProducts": [
+      {
+        "id": "hero_prod_1",
+        "image": "/images/hero-energy-boy.png",
+        "buttonLabel": "Buy Now",
+        "buttonPath": "/product/energy-boy",
+        "backgroundColorClass": "bg-yellow-400"
+      },
+      {
+        "id": "hero_prod_2",
+        "images": [
+          "/images/hero-favorite-jar1.png",
+          "/images/hero-favorite-jar2.png"
+        ],
+        "buttonLabel": "Buy Now",
+        "buttonPath": "/products?filter=sale",
+        "backgroundColorClass": "bg-red-500"
+      },
+      {
+        "id": "hero_prod_3",
+        "images": [
+          "/images/hero-mixes-sachet1.png",
+          "/images/hero-mixes-sachet2.png"
+        ],
+        "buttonLabel": "Buy Now",
+        "buttonPath": "/products?filter=sale&category=mixes",
+        "backgroundColorClass": "bg-green-500"
+      },
+      {
+        "id": "hero_prod_4",
+        "image": "/images/hero4.png",
+        "buttonLabel": "Buy Now",
+        "buttonPath": "/categories?category=Instant%20Noodles",
+        "backgroundColorClass": "bg-red-400"
+      },
+      {
+        "id": "hero_prod_5",
+        "image": "/images/hero5.png",
+        "buttonLabel": "Buy Now",
+        "buttonPath": "/categories?category=In-The-Can",
+        "backgroundColorClass": "bg-amber-500"
+      },
+      {
+        "id": "hero_prod_6",
+        "image": "/images/hero7.png",
+        "buttonLabel": "Buy Now",
+        "buttonPath": "/products",
+        "backgroundColorClass": "bg-lime-400"
+      }
+    ]
+  },
+  "whyChooseUs": {
+    "title": "Why Choose Us",
+    "centerImage": "/images/flip.png",
+    "features": [
+      {
+        "id": "feature_1",
+        "icon": "quality-goods",
+        "name": "Quality Goods",
+        "description": "We make sure our products are fresh and well-prepared. Good food always comes first."
+      },
+      {
+        "id": "feature_2",
+        "icon": "easy-access",
+        "name": "Easy Access",
+        "description": "Ordering online is quick and hassle-free. Just a few clicks and your favorites are on the way."
+      },
+      {
+        "id": "feature_3",
+        "icon": "authentic-taste",
+        "name": "Authentic Taste",
+        "description": "We serve real Filipino flavors you know and love. Every item is made to remind you of home."
+      },
+      {
+        "id": "feature_4",
+        "icon": "more-deals",
+        "name": "More Deals",
+        "description": "Enjoy regular deals and promos that help you save on your favorites."
+      }
+    ]
+  },
+  "topCategories": {
+    "title": "Shop From Top Categories",
+    "viewAllPath": "/categories",
+    "viewAllLabel": "View All",
+    "categories": [
+      { "id": "cat_1", "name": "Instant Noodles", "image": "/images/cat-noodles.png", "path": "/categories/instant-noodles" },
+      { "id": "cat_2", "name": "In-The-Can", "image": "/images/cat-canned.png", "path": "/categories/in-the-can" },
+      { "id": "cat_3", "name": "Bansa", "image": "/images/cat-bansa.png", "path": "/categories/bansa" },
+      { "id": "cat_4", "name": "Pocket Seasoning", "image": "/images/cat-seasoning.png", "path": "/categories/pocket-seasoning" },
+      { "id": "cat_5", "name": "Chips & Biscuits", "image": "/images/cat-chips.png", "path": "/categories/chips-biscuits" },
+      { "id": "cat_6", "name": "Ready to cook", "image": "/images/cat-ready-cook.png", "path": "/categories/ready-to-cook" },
+      { "id": "cat_7", "name": "Meal to go", "image": "/images/cat-meal-to-go.png", "path": "/categories/meal-to-go" }
+    ]
+  },
+  "newArrivals": {
+    "title": "New Arrivals",
+    "searchPlaceholder": "Search Product",
+    "products": [
+      {
+        "id": "PT001",
+        "name": "555 Tuna Caldereta",
+        "image": "/images/tuna-caldereta.png",
+        "price": "R55",
+        "inStock": true,
+        "isNew": true,
+        "category": "Canned",
+        "brand": "555"
+      },
+      {
+        "id": "PT002",
+        "name": "Pancit Canton Extra Hot",
+        "image": "/images/pancit-extra-hot.png",
+        "price": "R55",
+        "inStock": true,
+        "isNew": true,
+        "category": "Instant Noodles",
+        "brand": "Lucky Me"
+      },
+      {
+        "id": "PT003",
+        "name": "Pancit Canton Chilinivansi",
+        "image": "/images/pancit-chilinivansi.png",
+        "price": "R55",
+        "inStock": true,
+        "isNew": true,
+        "category": "Instant Noodles",
+        "brand": "Lucky Me"
+      },
+      {
+        "id": "PT004",
+        "name": "Pancit Canton Sweet & Spicy",
+        "image": "/images/pancit-sweet-spicy.png",
+        "price": "R55",
+        "inStock": true,
+        "isNew": true,
+        "category": "Instant Noodles",
+        "brand": "Lucky Me"
+      },
+      {
+        "id": "PT005",
+        "name": "Pancit Canton Original",
+        "image": "/images/pancit-original.png",
+        "price": "R55",
+        "inStock": true,
+        "isNew": true,
+        "category": "Instant Noodles",
+        "brand": "Lucky Me"
+      },
+      {
+        "id": "PT006",
+        "name": "555 Tuna Afritada",
+        "image": "/images/tuna-afritada.png",
+        "price": "R55",
+        "inStock": true,
+        "isNew": true,
+        "category": "Canned",
+        "brand": "555"
+      }
+    ]
+  },
+  "upcomingStocks": {
+    "title": "Upcoming Stocks",
+    "products": [
+      {
+        "id": "ups_1",
+        "name": "555 Tuna Red Express",
+        "image": "/images/upcoming-tuna1.png",
+        "description": "FOR THOSE WHO LOVE OUR...",
+        "buttonLabel": "Upcoming Stock",
+        "buttonPath": "/product/upcoming-tuna-red-express"
+      },
+      {
+        "id": "ups_2",
+        "name": "555 Tuna Caldereta",
+        "image": "/images/upcoming-tuna2.png",
+        "description": "RICH, HEARTY, AND FULL OF FLAVOUR",
+        "buttonLabel": "Upcoming Stock",
+        "buttonPath": "/product/upcoming-tuna-caldereta"
+      },
+      {
+        "id": "ups_3",
+        "name": "555 Tuna Classic",
+        "image": "/images/upcoming-tuna3.png",
+        "description": "A BOLD FLAVOUR, MADE EASY...",
+        "buttonLabel": "Upcoming Stock",
+        "buttonPath": "/product/upcoming-tuna-classic"
+      },
+      {
+        "id": "ups_4",
+        "name": "555 Tuna Adobo",
+        "image": "/images/upcoming-tuna4.png",
+        "description": "A BOLD FLAVOUR, MADE EASY...",
+        "buttonLabel": "Upcoming Stock",
+        "buttonPath": "/product/upcoming-tuna-adobo"
+      }
+    ]
+  },
+  "faqSection": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "We want your shopping to be stress-free. Here are quick answers you need.",
+    "infoBackgroundImage": "/images/ask.png",
+    "infoTitle": "Kathie's Kitchen",
+    "infoSubtitle": "Filipino Sari-Sari Store in South Africa",
+    "infoItems": [
+      {
+        "id": "info_website",
+        "iconType": "website",
+        "label": "www.kathieskitchen.com",
+        "value": "www.kathieskitchen.com"
+      },
+      {
+        "id": "info_email",
+        "iconType": "email",
+        "label": "info@kathieskitchen.com",
+        "value": "info@kathieskitchen.com"
+      },
+      {
+        "id": "info_phone",
+        "iconType": "phone",
+        "label": "071 575 1616",
+        "value": "071 575 1616"
+      },
+      {
+        "id": "info_facebook",
+        "iconType": "facebook",
+        "label": "facebook.com/kathieskitchen10/",
+        "value": "https://www.facebook.com/kathieskitchen10/"
+      }
+    ],
+    "faqs": [
+      {
+        "id": "faq_1",
+        "question": "Do price change often?",
+        "answer": "We provide a wide range of services including residential, commercial, deep cleaning, carpet and window cleaning, and eco-friendly options tailored to your needs."
+      },
+      {
+        "id": "faq_2",
+        "question": "What payment method do you accept?",
+        "answer": "We accept cash, EFT, and selected card and digital wallet payments."
+      },
+      {
+        "id": "faq_3",
+        "question": "How do deliveries work?",
+        "answer": "We deliver within selected areas of Cape Town. Delivery schedules and fees are calculated at checkout based on your location."
+      },
+      {
+        "id": "faq_4",
+        "question": "Can I return products?",
+        "answer": "Yes. Items may be returned within 7 days of purchase if unopened and in their original condition. Please keep your receipt."
+      },
+      {
+        "id": "faq_5",
+        "question": "What are your working hours?",
+        "answer": "We are open Monday to Saturday, 9:00 AM to 7:00 PM, and Sundays from 9:00 AM to 3:00 PM."
+      }
+    ]
+  },
+  "contactSection": {
+    "title": "Get in",
+    "highlight": "touch",
+    "subtitle": "Bringing home closer, one bite at a time",
+    "submitLabel": "Submit",
+    "mapImage": "/images/contact-map.png",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d423283.435549769!2d18.4241!3d-33.9249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc500f8826eed7%3A0x687fe1fc2828aa87!2sCape+Town%2C+South+Africa!5e0!3m2!1sen!2sza!4v1700000000000!5m2!1sen!2sza",
+    "fields": [
+      {
+        "id": "firstName",
+        "name": "firstName",
+        "label": "First Name",
+        "type": "text",
+        "placeholder": "First Name"
+      },
+      {
+        "id": "lastName",
+        "name": "lastName",
+        "label": "Last Name",
+        "type": "text",
+        "placeholder": "Last Name"
+      },
+      {
+        "id": "phone",
+        "name": "phone",
+        "label": "Phone Number",
+        "type": "tel",
+        "placeholder": "Phone Number"
+      },
+      {
+        "id": "message",
+        "name": "message",
+        "label": "Message",
+        "type": "textarea",
+        "placeholder": "Message"
+      }
+    ]
+  },
+  "footer": {
+    "logo": {
+      "imagePath": "/images/logo.png",
+      "text": "Kathie's Kitchen",
+      "tagline": "Filipino Sari-Sari Store IN SOUTH AFRICA"
+    },
+    "shopLinks": [
+      { "label": "Product", "path": "/products" },
+      { "label": "New Arrival", "path": "/products?filter=new" },
+      { "label": "Best Seller", "path": "/products?filter=bestseller" }
+    ],
+    "aboutLinks": [
+      { "label": "Why Us?", "path": "/about" },
+      { "label": "FAQ", "path": "/#faq" },
+      { "label": "Contact Us", "path": "/contact" }
+    ],
+    "phone": "+27 71 575 1616",
+    "whatsapp": "+27 71 575 1616",
+    "socialLinks": [
+      { "id": "fb", "name": "Facebook", "url": "https://www.facebook.com/kathieskitchen10/", "icon": "facebook" },
+      { "id": "ig", "name": "Instagram", "url": "#", "icon": "instagram" },
+      { "id": "tw", "name": "Twitter", "url": "#", "icon": "twitter" },
+      { "id": "yt", "name": "YouTube", "url": "#", "icon": "youtube" },
+      { "id": "wp", "name": "WordPress", "url": "#", "icon": "wordpress" }
+    ],
+    "copyright": "© 2026 Kathie's Kitchen | All Rights Reserved"
+  }
+}

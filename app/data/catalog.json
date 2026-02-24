@@ -1,0 +1,10 @@
+{
+  "filters": {
+    "customFilterLabel": "Special",
+    "priceRanges": [
+      { "label": "R50", "max": 50 },
+      { "label": "R60", "max": 60 },
+      { "label": "R80", "max": 80 }
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+[
+  {"id":"rev-1","productId":"prod-004","title":"Fresh & Excellent Quality","rating":4.5,"text":"The noodles arrived fresh and well-packaged. Great taste and perfect for a quick meal. Will definitely order again!","author":"Maria S."},
+  {"id":"rev-2","productId":"prod-004","title":"Convenient & Easy to Order","rating":4,"text":"Competitive prices and the order exceeded my expectations. Love the variety of options and the convenience of ordering online.","author":"John D."},
+  {"id":"rev-3","productId":"prod-001","title":"Authentic taste","rating":5,"text":"Tastes just like back home. Very satisfied with this purchase.","author":"Ana L."}
+]

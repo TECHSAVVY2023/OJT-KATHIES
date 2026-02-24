@@ -3,11 +3,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        'navtext': '#E6EAED',    // custom color for navbar text
-        'navbar-bg': '#20437B',  // custom navbar color
+        'navtext': '#E6EAED',
+        'navbar-bg': '#20437B',
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'], // make Poppins default
+        sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
     },
   },

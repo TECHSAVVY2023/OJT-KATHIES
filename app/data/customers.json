@@ -1,0 +1,12 @@
+[
+  {"id":"cust-1","name":"Wenilyn Bragat","phone":"0823456789","age":23,"status":"Active","registrationDate":"15.01.2025","lastPurchase":"10.01.2025","totalOrders":150,"completedOrders":140,"canceledOrders":10},
+  {"id":"cust-2","name":"Nombulelo","phone":"083 912 4567","age":28,"status":"Inactive","registrationDate":"12.01.2025","lastPurchase":"08.01.2025","totalOrders":45,"completedOrders":40,"canceledOrders":5},
+  {"id":"cust-3","name":"Kabelo Ram","phone":"084 234 5678","age":21,"status":"Active","registrationDate":"01.01.2025","lastPurchase":"11.01.2025","totalOrders":80,"completedOrders":75,"canceledOrders":5},
+  {"id":"cust-4","name":"Siphesihle Dube","phone":"081 876 5432","age":25,"status":"Active"},
+  {"id":"cust-5","name":"Thabo Molefe","phone":"082 111 2233","age":30,"status":"Inactive"},
+  {"id":"cust-6","name":"Lerato Khumalo","phone":"083 445 5667","age":27,"status":"Active"},
+  {"id":"cust-7","name":"Zanele Nkosi","phone":"084 778 8990","age":22,"status":"Active"},
+  {"id":"cust-8","name":"Naledi Zulu","phone":"082 334 4556","age":26,"status":"Inactive"},
+  {"id":"cust-9","name":"Kagiso Botha","phone":"081 667 7889","age":24,"status":"Active"},
+  {"id":"cust-10","name":"Sipho Mthembu","phone":"083 990 0112","age":29,"status":"Active"}
+]

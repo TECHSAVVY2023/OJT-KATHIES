@@ -1,0 +1,10 @@
+[
+  {"id":"ord-1","orderId":"#32","customerName":"Siphesihle Dube","productName":"Pancit Canton Hot & Spicy","productImage":"/images/products/pancit-canton-extra-hot.png","quantity":100,"total":"R55","paymentMethod":"COD","status":"Completed"},
+  {"id":"ord-2","orderId":"#35","customerName":"Nombulelo Sithole","productName":"555 Tuna Afritada","productImage":"/images/products/555-tuna-afritada.png","quantity":20,"total":"R55","paymentMethod":"COD","status":"In-Progress"},
+  {"id":"ord-3","orderId":"#34","customerName":"Thabo Molefe","productName":"Pancit Canton Original","productImage":"/images/products/pancit-canton-original.png","quantity":70,"total":"R55","paymentMethod":"COD","status":"Pending"},
+  {"id":"ord-4","orderId":"#33","customerName":"Lerato Khumalo","productName":"555 Tuna Caldereta","productImage":"/images/products/555-tuna-caldereta.png","quantity":50,"total":"R55","paymentMethod":"COD","status":"Completed"},
+  {"id":"ord-5","orderId":"#31","customerName":"Zanele Nkosi","productName":"Pancit Canton Chilimansi","productImage":"/images/products/pancit-canton-chilimansi.png","quantity":15,"total":"R55","paymentMethod":"COD","status":"Canceled"},
+  {"id":"ord-6","orderId":"#30","customerName":"Sipho Mthembu","productName":"555 Tuna Hot & Spicy","productImage":"/images/products/555-tuna-hot-spicy.png","quantity":40,"total":"R55","paymentMethod":"COD","status":"Returned"},
+  {"id":"ord-7","orderId":"#29","customerName":"Naledi Zulu","productName":"Pancit Canton Sweet & Spicy","productImage":"/images/products/pancit-canton-sweet-spicy.png","quantity":25,"total":"R55","paymentMethod":"COD","status":"Damaged"},
+  {"id":"ord-8","orderId":"#28","customerName":"Kagiso Botha","productName":"555 Tuna Afritada","productImage":"/images/products/555-tuna-afritada.png","quantity":80,"total":"R55","paymentMethod":"COD","status":"Pending"}
+]

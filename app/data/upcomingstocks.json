@@ -1,0 +1,10 @@
+[
+  {"id":"ups-001","headerBgClass":"bg-emerald-800","productBrand":"555 TUNA","productFlavor":"Spicy Bicol Express","productImage":"/images/upcoming/u1.jpg","buttonText":"Upcoming Stock","buttonPath":"/product/555-tuna-bicol-express"},
+  {"id":"ups-002","headerBgClass":"bg-blue-900","productBrand":"555 TUNA","productFlavor":"Caldereta","productImage":"/images/upcoming/u2.jpg","buttonText":"Upcoming Stock","buttonPath":"/product/555-tuna-caldereta"},
+  {"id":"ups-003","headerBgClass":"bg-emerald-800","productBrand":"555 TUNA","productFlavor":"Afritada","productImage":"/images/upcoming/u3.jpg","buttonText":"Upcoming Stock","buttonPath":"/product/555-tuna-afritada"},
+  {"id":"ups-004","headerBgClass":"bg-blue-900","productBrand":"555 TUNA","productFlavor":"Adobo","productImage":"/images/upcoming/u4.jpg","buttonText":"Upcoming Stock","buttonPath":"/product/555-tuna-adobo"},
+  {"id":"ups-005","headerBgClass":"bg-emerald-800","productBrand":"555 TUNA","productFlavor":"Hot & Spicy","productImage":"/images/upcoming/u5.jpg","buttonText":"Upcoming Stock","buttonPath":"/product/555-tuna-hot-spicy"},
+  {"id":"ups-006","headerBgClass":"bg-blue-900","productBrand":"Lucky Me!","productFlavor":"Pancit Canton","productImage":"/images/upcoming/u6.jpg","buttonText":"Upcoming Stock","buttonPath":"/categories?category=Instant%20Noodles"},
+  {"id":"ups-007","headerBgClass":"bg-emerald-800","productBrand":"555 TUNA","productFlavor":"Spanish Sardines","productImage":"/images/upcoming/u7.jpg","buttonText":"Upcoming Stock","buttonPath":"/products"},
+  {"id":"ups-008","headerBgClass":"bg-blue-900","productBrand":"Lucky Me!","productFlavor":"Chilimansi","productImage":"/images/upcoming/u8.jpg","buttonText":"Upcoming Stock","buttonPath":"/categories?category=Instant%20Noodles"}
+]

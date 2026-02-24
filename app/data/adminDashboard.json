@@ -1,0 +1,47 @@
+{
+  "todayOrders": "100+",
+  "stats": {
+    "totalUsers": 34,
+    "totalUsersChange": "4% (30 days)",
+    "totalOrders": 210,
+    "totalOrdersChange": "4% (30 days)",
+    "totalDelivered": 190,
+    "totalDeliveredChange": "4% (30 days)",
+    "totalSales": "R500",
+    "totalSalesChange": "41% (30 days)"
+  },
+  "salesChartYear": 2026,
+  "salesChart": [
+    { "month": "Jan", "value": 3200 },
+    { "month": "Feb", "value": 3800 },
+    { "month": "Mar", "value": 4100 },
+    { "month": "Apr", "value": 3500 },
+    { "month": "May", "value": 4200 },
+    { "month": "Jun", "value": 4800 },
+    { "month": "Jul", "value": 5100 },
+    { "month": "Aug", "value": 6200 },
+    { "month": "Sep", "value": 5800 },
+    { "month": "Oct", "value": 6500 },
+    { "month": "Nov", "value": 5200 },
+    { "month": "Dec", "value": 4500 }
+  ],
+  "salesTotal": "R45787",
+  "salesChange": "+15% increased from last year",
+  "ordersChart": [
+    { "month": "W1", "value": 42 },
+    { "month": "W2", "value": 38 },
+    { "month": "W3", "value": 55 },
+    { "month": "W4", "value": 48 },
+    { "month": "W5", "value": 62 },
+    { "month": "W6", "value": 45 }
+  ],
+  "recentTransactions": [
+    { "id": 1, "orderDetails": "Pancit Canton Spicy", "orderTime": "15 Mins", "payment": "COD", "transactionId": "#416645453773", "status": "Success", "amount": "R66.00" },
+    { "id": 2, "orderDetails": "555 Tuna Afritada", "orderTime": "22 Mins", "payment": "COD", "transactionId": "#416645453774", "status": "Cancelled", "amount": "R55.00" },
+    { "id": 3, "orderDetails": "Boy Bawang Garlic", "orderTime": "8 Mins", "payment": "COD", "transactionId": "#416645453775", "status": "Pending", "amount": "R45.00" },
+    { "id": 4, "orderDetails": "Mang Tomas Sauce", "orderTime": "30 Mins", "payment": "COD", "transactionId": "#416645453776", "status": "Success", "amount": "R72.00" },
+    { "id": 5, "orderDetails": "555 Tuna Caldereta", "orderTime": "12 Mins", "payment": "COD", "transactionId": "#416645453777", "status": "Success", "amount": "R55.00" }
+  ],
+  "bestSellers": [],
+  "lowStockProducts": []
+}

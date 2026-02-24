@@ -1,0 +1,10 @@
+[
+  {"id":"cat-instant-noodles","name":"Instant Noodles","image":"/images/categories/instant-noodles.png","path":"/categories/instant-noodles","order":25,"createdAt":"01-01-2025"},
+  {"id":"cat-in-the-can","name":"In-The-Can","image":"/images/categories/in-the-can.png","path":"/categories/in-the-can","order":20,"createdAt":"01-01-2025"},
+  {"id":"cat-sarsa","name":"Sarsa","image":"/images/categories/sarsa.png","path":"/categories/sarsa","order":35,"createdAt":"01-01-2025"},
+  {"id":"cat-packet-seasoning","name":"Packet Seasoning","image":"/images/categories/packet-seasoning.png","path":"/categories/packet-seasoning","order":18,"createdAt":"01-01-2025"},
+  {"id":"cat-chips-biscuits","name":"Chips & Biscuits","image":"/images/categories/chips-biscuits.png","path":"/categories/chips-biscuits","order":22,"createdAt":"01-01-2025"},
+  {"id":"cat-ready-to-cook","name":"Ready to Cook","image":"/images/categories/ready-to-cook.png","path":"/categories/ready-to-cook","order":15,"createdAt":"01-01-2025"},
+  {"id":"cat-halo-halo","name":"Halo Halo Ingredients","image":"/images/categories/halo-halo.png","path":"/categories/halo-halo","order":30,"createdAt":"01-01-2025"},
+  {"id":"cat-meal-to-go","name":"Meal To Go","image":"/images/categories/meal-to-go.png","path":"/categories/meal-to-go","order":28,"createdAt":"01-01-2025"}
+]
