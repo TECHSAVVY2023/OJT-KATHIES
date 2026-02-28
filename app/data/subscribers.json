@@ -1,7 +1,18 @@
 [
-  { "id": "sub_1", "email": "maria.santos@example.com", "subscribedAt": "2025-02-01T10:00:00.000Z" },
-  { "id": "sub_2", "email": "juan.delacruz@example.com", "subscribedAt": "2025-02-05T14:30:00.000Z" },
-  { "id": "sub_3", "email": "ana.reyes@example.com", "subscribedAt": "2025-02-10T09:15:00.000Z" },
-  { "id": "sub_4", "email": "carlos.garcia@example.com", "subscribedAt": "2025-02-15T16:45:00.000Z" },
-  { "id": "sub_5", "email": "liza.tan@example.com", "subscribedAt": "2025-02-20T11:20:00.000Z" }
+  { "id": "sub_1", 
+  "email": "maria.santos@example.com",
+  "subscribedAt": "2025-02-01T10:00:00.000Z" },
+  { "id": "sub_2",
+   "email": "juan.delacruz@example.com",
+    "subscribedAt": "2025-02-05T14:30:00.000Z" },
+  { "id": "sub_3", 
+  "email": "ana.reyes@example.com",
+   "subscribedAt": "2025-02-10T09:15:00.000Z" },
+  { "id": "sub_4", 
+  "email": "carlos.garcia@example.com",
+   "subscribedAt": "2025-02-15T16:45:00.000Z" },
+  { "id": "sub_5",
+   "email": "liza.tan@example.com",
+   "subscribedAt": "2025-02-20T11:20:00.000Z" }
 ]
+
