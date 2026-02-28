@@ -20,7 +20,7 @@
         >
           <span
             v-if="p.isNew"
-            class="absolute top-3 left-3 bg-gradient-to-r from-green-600 to-green-400 text-white text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide z-10"
+            class="absolute top-3 left-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded-md uppercase tracking-wider shadow-sm z-10"
           >
             New
           </span>
@@ -42,9 +42,6 @@
             >
             <span v-else class="text-5xl">🛒</span>
           </div>
-          <span class="inline-flex items-center gap-0.5 bg-amber-100 text-amber-800 text-xs font-medium px-2 py-0.5 rounded-md mb-2">
-            {{ p.rating }}<span class="text-amber-500">★</span>
-          </span>
           <p class="font-bold text-gray-900 truncate text-sm leading-tight mb-2">
             {{ p.name }}
           </p>
@@ -53,19 +50,19 @@
             <span class="text-sm font-medium text-green-600 shrink-0">In Stock</span>
           </div>
           <div class="flex items-center gap-2">
-            <div class="flex items-center rounded-full border-2 border-red-500 overflow-hidden bg-white shrink-0">
+            <div class="flex items-center rounded-full border border-slate-300 overflow-hidden bg-slate-50 shrink-0">
               <button
                 type="button"
-                class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center text-lg font-medium hover:bg-red-600 transition-colors"
+                class="w-7 h-7 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-sm font-medium hover:bg-slate-300 transition-colors"
                 aria-label="Decrease quantity"
                 @click="setQty(p.id, getQty(p.id) - 1)"
               >
                 −
               </button>
-              <span class="min-w-[2rem] text-center text-sm font-medium text-gray-900">{{ getQty(p.id) }}</span>
+                <span class="min-w-[1.75rem] text-center text-xs font-medium text-gray-900">{{ getQty(p.id) }}</span>
               <button
                 type="button"
-                class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center text-lg font-medium hover:bg-red-600 transition-colors"
+                class="w-7 h-7 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-sm font-medium hover:bg-slate-300 transition-colors"
                 aria-label="Increase quantity"
                 @click="setQty(p.id, getQty(p.id) + 1)"
               >
@@ -74,10 +71,13 @@
             </div>
             <button
               type="button"
-              class="flex-1 py-2.5 bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-sm font-medium rounded-lg transition-colors whitespace-nowrap"
+              class="flex-1 py-2 px-2.5 bg-[#1e3a5f] hover:bg-[#083D6D] text-white text-xs font-medium rounded-lg transition-colors flex items-center justify-center gap-1.5"
               @click="addToCart(p.id)"
             >
-              Add to cart
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span>Add to cart</span>
             </button>
           </div>
         </div>

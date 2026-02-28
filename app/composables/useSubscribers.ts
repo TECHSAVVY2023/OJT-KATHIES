@@ -1,3 +1,5 @@
+import subscribersJson from '~/data/subscribers.json'
+
 const SUBSCRIBERS_STORAGE_KEY = 'kathies-subscribers'
 
 export interface Subscriber {
@@ -6,19 +8,22 @@ export interface Subscriber {
   subscribedAt: string
 }
 
+const defaultSubscribers = subscribersJson as Subscriber[]
+
 function loadSubscribers(): Subscriber[] {
   if (import.meta.client && typeof localStorage !== 'undefined') {
     try {
       const raw = localStorage.getItem(SUBSCRIBERS_STORAGE_KEY)
       if (raw) {
         const parsed = JSON.parse(raw) as Subscriber[]
-        return Array.isArray(parsed) ? parsed : []
+        return Array.isArray(parsed) ? parsed : defaultSubscribers
       }
+      return defaultSubscribers
     } catch {
-      // ignore
+      return defaultSubscribers
     }
   }
-  return []
+  return defaultSubscribers
 }
 
 function saveSubscribers(items: Subscriber[]) {

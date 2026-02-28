@@ -178,10 +178,16 @@ export interface FooterData {
   copyright: string
 }
 
+/** About section */
+export interface AboutSectionData {
+  images: string[]
+}
+
 /** Full landing data (birahon) */
 export interface LandingData {
   header: HeaderData
   heroSection: HeroSectionData
+  aboutSection?: AboutSectionData
   whyChooseUs: WhyChooseUsData
   topCategories: TopCategoriesData
   newArrivals: NewArrivalsData

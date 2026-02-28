@@ -7,11 +7,11 @@
       <LandingTopCategories />
       <LandingNewArrivals />
       <LandingUpcomingStocks />
-      <!-- FAQ + Get in touch (same section) -->
+      <LandingSubscribe />
+      <!-- FAQ -->
       <section id="faq" class="py-16 bg-gradient-to-br from-white via-[#eef3ff] to-white">
         <div class="container mx-auto px-4">
           <LandingFaq />
-          <LandingGetInTouch />
         </div>
       </section>
     </div>

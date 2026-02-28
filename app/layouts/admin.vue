@@ -61,7 +61,7 @@
     <div class="flex-1 flex flex-col min-w-0 min-h-screen" style="padding-left: 280px;">
       <!-- Top header - white, design accent #20437B -->
       <header class="h-16 shrink-0 bg-white border-b border-[#D3DDFF] flex items-center justify-between px-6 gap-4">
-        <div class="flex-1 max-w-md relative">
+        <div v-if="isDashboard" class="flex-1 max-w-md relative">
           <input
             v-model="searchQuery"
             type="search"
@@ -72,6 +72,7 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
           </span>
         </div>
+        <div v-else class="flex-1" />
         <div class="relative flex items-center gap-3 sm:gap-4">
           <!-- Click-outside overlay to close dropdowns -->
           <div
@@ -90,7 +91,7 @@
               @click="headerMenuOpen = headerMenuOpen === 'notifications' ? null : 'notifications'"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 6H9" /></svg>
-              <span class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-blue-500 text-white text-[10px] font-semibold flex items-center justify-center">5</span>
+              <span v-if="unreadNotificationsCount > 0" class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-blue-500 text-white text-[10px] font-semibold flex items-center justify-center">{{ unreadNotificationsCount }}</span>
             </button>
             <div
               v-if="headerMenuOpen === 'notifications'"
@@ -98,12 +99,21 @@
             >
               <div class="px-4 py-2 border-b border-gray-100 flex items-center justify-between">
                 <h3 class="font-semibold text-gray-900">Notifications</h3>
-                <button type="button" class="text-xs text-blue-500 hover:underline" @click="headerMenuOpen = null">Mark all read</button>
+                <button type="button" class="text-xs text-blue-500 hover:underline" @click="markAllNotificationsRead">Mark all read</button>
               </div>
               <div class="max-h-64 overflow-y-auto">
-                <a href="#" class="block px-4 py-2.5 hover:bg-blue-50 text-sm text-gray-700 border-b border-gray-50 last:border-0" @click.prevent="headerMenuOpen = null">New order #1024 received</a>
-                <a href="#" class="block px-4 py-2.5 hover:bg-blue-50 text-sm text-gray-700 border-b border-gray-50 last:border-0" @click.prevent="headerMenuOpen = null">Low stock: 555 Tuna Bicol Express</a>
-                <a href="#" class="block px-4 py-2.5 hover:bg-blue-50 text-sm text-gray-700 border-b border-gray-50 last:border-0" @click.prevent="headerMenuOpen = null">Customer message from Jane D.</a>
+                <a
+                  v-for="n in adminNotifications"
+                  :key="n.id"
+                  href="#"
+                  class="flex items-center justify-between gap-2 px-4 py-2.5 hover:bg-blue-50 text-sm border-b border-gray-50 last:border-0 transition-colors"
+                  :class="n.read ? 'text-gray-500 bg-gray-50/50' : 'text-gray-700'"
+                  @click.prevent="markNotificationRead(n.id); headerMenuOpen = null"
+                >
+                  <span class="truncate">{{ n.text }}</span>
+                  <span v-if="!n.read" class="shrink-0 w-2 h-2 rounded-full bg-blue-500" title="Unread" />
+                  <span v-else class="shrink-0 text-[10px] text-gray-400">Read</span>
+                </a>
               </div>
               <div class="px-4 py-2 border-t border-gray-100">
                 <NuxtLink to="/admin/orders" class="text-sm font-medium text-blue-500 hover:underline" @click="headerMenuOpen = null">View all notifications</NuxtLink>
@@ -120,52 +130,32 @@
               @click="headerMenuOpen = headerMenuOpen === 'messages' ? null : 'messages'"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
-              <span class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-orange-500 text-white text-[10px] font-semibold flex items-center justify-center">10</span>
+              <span v-if="unreadMessagesCount > 0" class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-orange-500 text-white text-[10px] font-semibold flex items-center justify-center">{{ unreadMessagesCount }}</span>
             </button>
             <div
               v-if="headerMenuOpen === 'messages'"
               class="absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-gray-200 py-2"
             >
-              <div class="px-4 py-2 border-b border-gray-100">
+              <div class="px-4 py-2 border-b border-gray-100 flex items-center justify-between">
                 <h3 class="font-semibold text-gray-900">Messages</h3>
+                <button type="button" class="text-xs text-orange-500 hover:underline" @click="markAllMessagesRead">Mark all read</button>
               </div>
               <div class="max-h-64 overflow-y-auto">
-                <a href="#" class="block px-4 py-2.5 hover:bg-orange-50 text-sm text-gray-700 border-b border-gray-50 last:border-0" @click.prevent="headerMenuOpen = null">Jane D. – Order inquiry</a>
-                <a href="#" class="block px-4 py-2.5 hover:bg-orange-50 text-sm text-gray-700 border-b border-gray-50 last:border-0" @click.prevent="headerMenuOpen = null">John M. – Delivery question</a>
-                <a href="#" class="block px-4 py-2.5 hover:bg-orange-50 text-sm text-gray-700 border-b border-gray-50 last:border-0" @click.prevent="headerMenuOpen = null">Support – New ticket</a>
+                <a
+                  v-for="msg in adminMessages"
+                  :key="msg.id"
+                  href="#"
+                  class="flex items-center justify-between gap-2 px-4 py-2.5 hover:bg-orange-50 text-sm border-b border-gray-50 last:border-0 transition-colors"
+                  :class="msg.read ? 'text-gray-500 bg-gray-50/50' : 'text-gray-700'"
+                  @click.prevent="markMessageRead(msg.id); headerMenuOpen = null"
+                >
+                  <span class="truncate">{{ msg.subject }}</span>
+                  <span v-if="!msg.read" class="shrink-0 w-2 h-2 rounded-full bg-orange-500" title="Unread" />
+                  <span v-else class="shrink-0 text-[10px] text-gray-400">Read</span>
+                </a>
               </div>
               <div class="px-4 py-2 border-t border-gray-100">
                 <span class="text-sm text-gray-500">Open a message to reply</span>
-              </div>
-            </div>
-          </div>
-          <!-- Settings -->
-          <div class="relative z-50">
-            <button
-              type="button"
-              class="relative w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500 hover:bg-red-200/80 transition-colors shrink-0"
-              aria-label="Settings"
-              aria-expanded="headerMenuOpen === 'settings'"
-              @click="headerMenuOpen = headerMenuOpen === 'settings' ? null : 'settings'"
-            >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-              <span class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-red-500 text-white text-[10px] font-semibold flex items-center justify-center">19</span>
-            </button>
-            <div
-              v-if="headerMenuOpen === 'settings'"
-              class="absolute right-0 top-full mt-2 w-72 bg-white rounded-xl shadow-xl border border-gray-200 py-2"
-            >
-              <div class="px-4 py-2 border-b border-gray-100">
-                <h3 class="font-semibold text-gray-900">Settings</h3>
-              </div>
-              <div class="px-4 py-3 space-y-1">
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-red-50 rounded-lg" @click.prevent="headerMenuOpen = null">Profile & account</a>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-red-50 rounded-lg" @click.prevent="headerMenuOpen = null">Store details</a>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-red-50 rounded-lg" @click.prevent="headerMenuOpen = null">Notifications</a>
-                <a href="#" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-red-50 rounded-lg" @click.prevent="headerMenuOpen = null">Security</a>
-              </div>
-              <div class="px-4 py-2 border-t border-gray-100">
-                <span class="text-xs text-gray-500">19 pending updates</span>
               </div>
             </div>
           </div>
@@ -193,7 +183,37 @@ const route = useRoute()
 const { footer } = useLandingData()
 const { user, logout } = useAuth()
 const searchQuery = ref('')
-const headerMenuOpen = ref<'notifications' | 'messages' | 'settings' | null>(null)
+const headerMenuOpen = ref<'notifications' | 'messages' | null>(null)
+
+interface AdminNotification { id: string; text: string; read: boolean }
+const adminNotifications = ref<AdminNotification[]>([
+  { id: '1', text: 'New order #1024 received', read: false },
+  { id: '2', text: 'Low stock: 555 Tuna Bicol Express', read: false },
+  { id: '3', text: 'Customer message from Jane D.', read: false }
+])
+const unreadNotificationsCount = computed(() => adminNotifications.value.filter(n => !n.read).length)
+function markNotificationRead(id: string) {
+  const n = adminNotifications.value.find(x => x.id === id)
+  if (n) n.read = true
+}
+function markAllNotificationsRead() {
+  adminNotifications.value.forEach(n => { n.read = true })
+}
+
+interface AdminMessage { id: string; subject: string; read: boolean }
+const adminMessages = ref<AdminMessage[]>([
+  { id: '1', subject: 'Jane D. – Order inquiry', read: false },
+  { id: '2', subject: 'John M. – Delivery question', read: false },
+  { id: '3', subject: 'Support – New ticket', read: false }
+])
+const unreadMessagesCount = computed(() => adminMessages.value.filter(m => !m.read).length)
+function markMessageRead(id: string) {
+  const m = adminMessages.value.find(x => x.id === id)
+  if (m) m.read = true
+}
+function markAllMessagesRead() {
+  adminMessages.value.forEach(m => { m.read = true })
+}
 
 const navItems = [
   { label: 'Dashboard', path: '/admin', icon: 'home' },
@@ -202,13 +222,15 @@ const navItems = [
   { label: 'Category', path: '/admin/category', icon: 'category' },
   { label: 'Order List', path: '/admin/orders', icon: 'list' },
   { label: 'Customer', path: '/admin/customers', icon: 'user' },
-  { label: 'Subscribe', path: '/admin/subscribe', icon: 'subscribe' }
+  { label: 'Subscribers', path: '/admin/subscribe', icon: 'subscribe' }
 ]
 
 const isActive = (path: string) => {
   if (path === '/admin') return route.path === '/admin'
   return route.path.startsWith(path)
 }
+
+const isDashboard = computed(() => route.path === '/admin')
 
 const formattedDate = computed(() => {
   const d = new Date()

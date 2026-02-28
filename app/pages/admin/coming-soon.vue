@@ -17,14 +17,6 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
           Add Product
         </button>
-        <button
-          type="button"
-          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-red-500 text-white font-medium hover:opacity-90 transition-opacity"
-          @click="onImport"
-        >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
-          Import Product
-        </button>
       </div>
     </div>
 
@@ -286,11 +278,6 @@ function confirmDelete(item: UpcomingStockItem) {
   if (confirm(`Delete "${name}"? This will remove it from the list.`)) {
     deleteUpcomingStock(item.id)
   }
-}
-
-function onImport() {
-  if (!import.meta.client) return
-  alert('Import Product: upload a file to bulk add coming soon products. (Not implemented in this demo.)')
 }
 
 const productCountLabel = computed(() => {

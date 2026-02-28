@@ -1,32 +1,22 @@
 <template>
   <div class="space-y-6">
     <div>
-      <h1 class="text-2xl sm:text-3xl font-bold text-[#20437B]">Subscribe</h1>
+      <h1 class="text-2xl sm:text-3xl font-bold text-[#20437B]">Subscribers</h1>
       <p class="text-[#20437B]/80 mt-1">
         Newsletter subscribers from the footer form. Total: <strong class="text-[#20437B]">{{ count }}</strong>
       </p>
     </div>
 
-    <div class="bg-white rounded-xl border border-[#D3DDFF] p-5 shadow-sm flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-lg bg-[#D3DDFF]/50 flex items-center justify-center shrink-0">
-          <svg class="w-5 h-5 text-[#20437B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
-        </div>
-        <div>
-          <p class="text-2xl font-bold text-[#20437B]">{{ count }}</p>
-          <p class="text-sm text-gray-500">Total subscribers</p>
-        </div>
+    <div class="bg-white rounded-xl border border-[#D3DDFF] p-5 shadow-sm flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-[#D3DDFF]/50 flex items-center justify-center shrink-0">
+        <svg class="w-5 h-5 text-[#20437B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
       </div>
-      <button
-        type="button"
-        class="px-4 py-2 rounded-lg bg-[#20437B] text-white text-sm font-medium hover:bg-[#1a3562] transition-colors disabled:opacity-50 disabled:pointer-events-none"
-        :disabled="filteredList.length === 0"
-        @click="exportCsv"
-      >
-        Export CSV
-      </button>
+      <div>
+        <p class="text-2xl font-bold text-[#20437B]">{{ count }}</p>
+        <p class="text-sm text-gray-500">Total subscribers</p>
+      </div>
     </div>
 
     <div class="relative max-w-md">
@@ -99,19 +89,6 @@ function formatDate(iso: string) {
   } catch {
     return iso
   }
-}
-
-function exportCsv() {
-  if (filteredList.value.length === 0) return
-  const header = 'Email,Subscribed at\n'
-  const rows = filteredList.value.map(s => `${s.email},${s.subscribedAt}`).join('\n')
-  const blob = new Blob([header + rows], { type: 'text/csv;charset=utf-8;' })
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = `subscribers-${new Date().toISOString().slice(0, 10)}.csv`
-  a.click()
-  URL.revokeObjectURL(url)
 }
 
 definePageMeta({ layout: 'admin' })

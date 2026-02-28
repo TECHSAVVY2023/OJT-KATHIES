@@ -19,31 +19,18 @@
               class="flex-shrink-0 flex justify-center"
               :style="{ width: `${100 / Math.max(1, list.length)}%` }"
             >
-              <div class="group w-full rounded-2xl overflow-hidden shadow-lg flex flex-col bg-white">
-                <div class="relative px-3 pt-4 flex items-end justify-center flex-1 min-h-[180px] bg-amber-900/5 overflow-hidden">
-                  <img
-                    v-if="p.productImage"
-                    :src="p.productImage"
-                    :alt="p.productFlavor"
-                    class="w-full h-auto max-h-[200px] object-contain object-bottom drop-shadow-2xl transition-transform duration-300 ease-out group-hover:scale-110"
-                  >
-                  <span v-else class="text-5xl">📦</span>
-                </div>
-                <div
-                  class="relative mt-auto px-4 pt-2 pb-4 rounded-b-2xl"
-                  style="background: linear-gradient(180deg, #083D6D 0%, #0F76D3 100%);"
+              <div class="group w-full rounded-2xl overflow-hidden shadow-lg bg-slate-900 aspect-square relative">
+                <img
+                  v-if="p.productImage"
+                  :src="p.productImage"
+                  :alt="p.productFlavor"
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-110"
                 >
-                  <p class="text-white text-xs font-medium uppercase tracking-wide mb-3 line-clamp-2">
-                    {{ p.description || `${p.productBrand} ${p.productFlavor}` }}
-                  </p>
-                  <NuxtLink
-                    :to="p.buttonPath"
-                    class="block w-full text-center py-3 text-white font-bold text-sm uppercase rounded-xl transition-opacity hover:opacity-95"
-                    style="background: linear-gradient(180deg, #e8b84a 0%, #c9942e 50%, #a67c20 100%); box-shadow: 0 2px 8px rgba(0,0,0,0.2);"
-                  >
-                    {{ p.buttonText }}
-                  </NuxtLink>
-                </div>
+                <span v-else class="absolute inset-0 flex items-center justify-center text-5xl">📦</span>
+                <div
+                  class="absolute inset-0 bg-black/0 transition-colors duration-300 ease-out group-hover:bg-black/30"
+                  aria-hidden="true"
+                />
               </div>
             </div>
           </div>

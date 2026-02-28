@@ -48,10 +48,7 @@
         <div class="grid grid-cols-3 gap-4">
           <div>
             <p class="text-sm text-gray-500 mb-0.5">Canceled</p>
-            <p class="text-xl font-bold text-gray-900">
-              {{ counts.canceled }}
-              <span class="text-sm font-medium text-red-600 ml-1">-20%</span>
-            </p>
+            <p class="text-xl font-bold text-gray-900">{{ counts.canceled }}</p>
           </div>
           <div>
             <p class="text-sm text-gray-500 mb-0.5">Returned</p>

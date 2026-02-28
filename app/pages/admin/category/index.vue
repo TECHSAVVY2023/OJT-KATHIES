@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-6">
-    <!-- Header -->
+    <!-- Header: Category title + Add Category button -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <h1 class="text-2xl sm:text-3xl font-bold text-[#20437B]">Category</h1>
       <button
@@ -13,23 +13,18 @@
       </button>
     </div>
 
-    <!-- Category cards: horizontal scroll -->
-    <div class="overflow-x-auto pb-2">
-      <div class="flex flex-nowrap gap-3 min-w-0">
-        <div
-          v-for="cat in sortedCategories"
-          :key="cat.id"
-          class="flex items-center gap-3 rounded-xl border border-[#D3DDFF] bg-white px-4 py-3 min-w-[180px] shrink-0 shadow-sm"
-        >
-          <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden shrink-0">
-            <img v-if="cat.image" :src="cat.image" :alt="cat.name" class="w-full h-full object-cover" @error="(e) => (e.currentTarget!.style.display = 'none')">
-            <span v-else class="text-gray-400 text-xs">No img</span>
-          </div>
-          <span class="font-medium text-[#20437B] text-sm truncate">{{ cat.name }}</span>
+    <!-- Category grid: white cards with image + label (display only) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div
+        v-for="cat in filteredCategories"
+        :key="cat.id"
+        class="flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm hover:shadow-md transition-shadow"
+      >
+        <div class="w-14 h-14 rounded-lg bg-gray-50 flex items-center justify-center overflow-hidden shrink-0 border border-gray-100">
+          <img v-if="cat.image" :src="cat.image" :alt="cat.name" class="w-full h-full object-cover" @error="(e) => (e.currentTarget!.style.display = 'none')">
+          <span v-else class="text-gray-400 text-xs">No img</span>
         </div>
-        <div class="shrink-0 w-8 flex items-center justify-center text-gray-400 pointer-events-none">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-        </div>
+        <span class="font-medium text-gray-900 text-sm truncate flex-1 min-w-0">{{ cat.name }}</span>
       </div>
     </div>
 
@@ -46,7 +41,7 @@
       </span>
     </div>
 
-    <!-- Table -->
+    <!-- Category table: detailed list with actions -->
     <div class="bg-white rounded-xl shadow-sm border border-[#D3DDFF] overflow-hidden">
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
@@ -199,16 +194,11 @@ function confirmDelete(item: CategoryItem) {
   }
 }
 
-const sortedCategories = computed(() => {
-  const list = [...categories.value]
-  return list.sort((a, b) => (b.order ?? 0) - (a.order ?? 0))
-})
-
 const filteredCategories = computed(() => {
   let list = [...categories.value]
   const q = searchQuery.value?.trim().toLowerCase()
   if (q) list = list.filter((c) => c.name.toLowerCase().includes(q))
-  return list.sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  return list.sort((a, b) => (b.order ?? 0) - (a.order ?? 0))
 })
 
 useHead({ title: "Category | Admin | Kathie's Kitchen" })

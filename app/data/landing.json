@@ -220,6 +220,15 @@
       }
     ]
   },
+  "aboutSection": {
+    "images": [
+      "/images/flip.png",
+      "/images/ask.png",
+      "/images/h1.png",
+      "/images/hero4.png",
+      "/images/hero5.png"
+    ]
+  },
   "faqSection": {
     "title": "Frequently Asked Questions",
     "subtitle": "We want your shopping to be stress-free. Here are quick answers you need.",
@@ -277,6 +286,11 @@
         "id": "faq_5",
         "question": "What are your working hours?",
         "answer": "We are open Monday to Saturday, 9:00 AM to 7:00 PM, and Sundays from 9:00 AM to 3:00 PM."
+      },
+      {
+        "id": "faq_6",
+        "question": "How do we get our orders?",
+        "answer": "We offer local delivery in Cape Town and surrounding areas, plus nationwide shipping through reliable couriers. Frozen goods and bulk items may require special handling - delivery fees depend on distance and order size. For detailed delivery options or bulk quotes, contact us at info@kathieskitchen.com or WhatsApp +27 71 575 1616."
       }
     ]
   },

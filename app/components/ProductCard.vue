@@ -1,9 +1,9 @@
 <template>
-  <div class="group rounded-3xl bg-white p-4 shadow-md border border-gray-100 relative overflow-hidden min-w-0 transition-all duration-200 hover:border-[#1e3a5f] hover:shadow-lg hover:ring-2 hover:ring-[#1e3a5f]/20">
+  <div class="group rounded-2xl bg-white p-3 shadow-sm border border-gray-100 relative overflow-hidden min-w-0 transition-all duration-200 hover:border-[#1e3a5f] hover:shadow-md hover:ring-2 hover:ring-[#1e3a5f]/20">
     <!-- New badge: only if product.isNew -->
     <span
       v-if="product.isNew"
-      class="absolute top-3 left-3 bg-gradient-to-r from-green-600 to-green-400 text-white text-xs font-medium px-3 py-1 rounded-full uppercase tracking-wide z-10"
+      class="absolute top-2 left-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded-md uppercase tracking-wider shadow-sm z-10"
     >
       New
     </span>
@@ -18,22 +18,15 @@
       </svg>
     </button>
     <!-- Product image (dynamic) – click goes to product detail -->
-    <NuxtLink :to="`/product/${product.id}`" class="block h-[160px] flex items-center justify-center mt-1 mb-2 overflow-hidden shrink-0">
+    <NuxtLink :to="`/product/${product.id}`" class="block h-[120px] flex items-center justify-center mt-0 mb-2 overflow-hidden shrink-0">
       <img
         v-if="product.imageUrl"
         :src="product.imageUrl"
         :alt="product.name"
-        class="max-h-[160px] w-auto max-w-full object-contain transition-transform duration-300 ease-out group-hover:scale-110"
+        class="max-h-[120px] w-auto max-w-full object-contain transition-transform duration-300 ease-out group-hover:scale-110"
       >
       <span v-else class="text-5xl">🛒</span>
     </NuxtLink>
-    <!-- Rating (dynamic, optional) -->
-    <span
-      v-if="product.rating != null"
-      class="inline-flex items-center gap-0.5 bg-amber-100 text-amber-800 text-xs font-medium px-2 py-0.5 rounded-md mb-2"
-    >
-      {{ product.rating }}<span class="text-amber-500">★</span>
-    </span>
     <!-- Product name (dynamic) – click goes to product detail -->
     <NuxtLink :to="`/product/${product.id}`" class="block mb-2">
       <p class="font-bold text-gray-900 truncate text-sm leading-tight hover:text-[#2563eb] hover:underline">
@@ -41,27 +34,27 @@
       </p>
     </NuxtLink>
     <!-- Price + Stock (dynamic) -->
-    <div class="flex items-baseline justify-between gap-2 mb-3">
-      <span class="text-xl font-bold text-gray-900">{{ product.currency }}{{ product.price }}</span>
+    <div class="flex items-baseline justify-between gap-2 mb-2">
+      <span class="text-base font-bold text-gray-900">{{ product.currency }}{{ product.price }}</span>
       <span class="text-sm font-medium shrink-0" :class="product.inStock ? 'text-green-600' : 'text-gray-500'">
         {{ product.inStock ? 'In Stock' : 'Out of Stock' }}
       </span>
     </div>
     <!-- Quantity + Add to Cart (min-w-0 so button stays visible in narrow cards) -->
     <div class="flex items-center gap-2 min-w-0">
-      <div class="flex items-center rounded-full border-2 border-red-500 overflow-hidden bg-white shrink-0">
+      <div class="flex items-center rounded-full border border-slate-300 overflow-hidden bg-slate-50 shrink-0">
         <button
           type="button"
-          class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center text-lg font-medium hover:bg-red-600 transition-colors"
+          class="w-7 h-7 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-sm font-medium hover:bg-slate-300 transition-colors"
           aria-label="Decrease quantity"
           @click="quantity = Math.max(1, quantity - 1)"
         >
           −
         </button>
-        <span class="min-w-[2rem] text-center text-sm font-medium text-gray-900">{{ quantity }}</span>
+        <span class="min-w-[1.75rem] text-center text-xs font-medium text-gray-900">{{ quantity }}</span>
         <button
           type="button"
-          class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center text-lg font-medium hover:bg-red-600 transition-colors"
+          class="w-7 h-7 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-sm font-medium hover:bg-slate-300 transition-colors"
           aria-label="Increase quantity"
           @click="quantity += 1"
         >
@@ -70,11 +63,14 @@
       </div>
       <button
         type="button"
-        class="flex-1 min-w-0 py-2.5 bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-sm font-medium rounded-lg transition-colors truncate"
+        class="flex-1 min-w-0 py-2 px-2.5 bg-[#1e3a5f] hover:bg-[#083D6D] text-white text-xs font-medium rounded-lg transition-colors flex items-center justify-center gap-1.5"
         :disabled="!product.inStock"
         @click="addToCart"
       >
-        Add to cart
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        <span class="truncate">Add to cart</span>
       </button>
     </div>
   </div>

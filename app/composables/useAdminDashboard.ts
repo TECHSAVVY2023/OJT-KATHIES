@@ -37,6 +37,12 @@ export function useAdminDashboard() {
       }))
   })
 
+  const monthlyLabels = ['Jan 1 - Feb 1', 'Feb 1 - Mar 1', 'Mar 1 - Apr 1', 'Apr 1 - May 1', 'May 1 - Jun 1', 'Jun 1 - Jul 1']
+  const ordersChart = computed(() => {
+    const raw = dashboard.value.ordersChart ?? []
+    return raw.map((p, i) => ({ ...p, month: monthlyLabels[i] ?? p.month }))
+  })
+
   return {
     todayOrders: computed(() => dashboard.value.todayOrders ?? '100+'),
     stats: computed(() => dashboard.value.stats),
@@ -44,7 +50,7 @@ export function useAdminDashboard() {
     salesChart: computed(() => dashboard.value.salesChart),
     salesTotal: computed(() => dashboard.value.salesTotal),
     salesChange: computed(() => dashboard.value.salesChange),
-    ordersChart: computed(() => dashboard.value.ordersChart),
+    ordersChart,
     recentTransactions: computed(() => dashboard.value.recentTransactions),
     bestSellers,
     lowStockProducts

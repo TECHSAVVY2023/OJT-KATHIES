@@ -30,7 +30,6 @@
         <div class="min-w-0 flex-1">
           <p class="text-2xl font-bold text-gray-900">{{ card.value }}</p>
           <p class="text-sm font-medium text-gray-600 mt-0.5">{{ card.label }}</p>
-          <p class="text-xs text-gray-500 mt-1">{{ card.change }}</p>
         </div>
       </div>
     </div>
@@ -43,7 +42,6 @@
           <div>
             <h2 class="font-bold text-gray-900">Sales</h2>
             <p class="text-2xl font-bold text-gray-900 mt-1">{{ salesTotal }}</p>
-            <p class="text-sm text-green-600 mt-0.5">{{ salesChange }}</p>
           </div>
           <div class="flex items-center gap-2">
             <span class="text-sm text-gray-500">{{ salesChartYear }}</span>
@@ -53,41 +51,42 @@
           </div>
         </div>
         <p class="text-xs text-gray-500 mb-3 text-right">• Sales</p>
-        <div class="h-48 flex items-end gap-1">
-          <div
-            v-for="(point, i) in salesChart"
-            :key="i"
-            class="flex-1 flex flex-col items-center gap-1"
-          >
-            <div
-              class="w-full bg-[#20437B] rounded-t min-h-[4px] transition-all hover:opacity-90"
-              :style="{ height: barHeight(salesChart, point) + '%' }"
-              :title="`${point.month}: ${point.value}`"
+        <div class="h-48 relative">
+          <svg class="w-full h-full" viewBox="0 0 200 120" preserveAspectRatio="none">
+            <polyline
+              fill="none"
+              stroke="#20437B"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              :points="salesLinePoints"
             />
-          </div>
+          </svg>
         </div>
         <div class="flex gap-1 mt-2">
           <span v-for="(point, i) in salesChart" :key="i" class="flex-1 text-[10px] text-gray-500 text-center truncate">{{ point.month }}</span>
         </div>
       </div>
 
-      <!-- Total orders chart - right, red bars -->
-      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
-        <div class="flex justify-between items-center mb-4">
+      <!-- Total orders chart - graph and monthly labels at bottom, minimal spacing -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col">
+        <div class="flex justify-between items-center mb-3">
           <h2 class="font-bold text-gray-900">Total orders</h2>
           <NuxtLink to="/admin/orders" class="text-sm text-[#20437B] font-medium hover:underline">View All</NuxtLink>
         </div>
-        <div class="h-32 flex items-end gap-1">
-          <div
-            v-for="(point, i) in ordersChart"
-            :key="i"
-            class="flex-1 bg-red-500 rounded-t min-h-[4px] transition-all"
-            :style="{ height: barHeight(ordersChart, point) + '%' }"
-            :title="`${point.month}: ${point.value}`"
-          />
-        </div>
-        <div class="flex gap-1 mt-2">
-          <span v-for="(point, i) in ordersChart" :key="i" class="flex-1 text-[10px] text-gray-500 text-center truncate">{{ point.month }}</span>
+        <div class="mt-auto flex flex-col gap-0">
+          <div class="h-24 flex items-end gap-1">
+            <div
+              v-for="(point, i) in ordersChart"
+              :key="i"
+              class="flex-1 bg-red-500 rounded-t min-h-[4px] transition-all"
+              :style="{ height: barHeight(ordersChart, point) + '%' }"
+              :title="`${point.month}: ${point.value}`"
+            />
+          </div>
+          <div class="flex gap-1 mt-1">
+            <span v-for="(point, i) in ordersChart" :key="i" class="flex-1 text-[10px] text-gray-500 text-center truncate">{{ point.month }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -144,27 +143,52 @@
         </div>
       </div>
 
-      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-        <div class="p-5 flex justify-between items-center border-b border-gray-100">
-          <h2 class="font-bold text-gray-900">Best Seller</h2>
-          <NuxtLink to="/admin/products" class="text-sm text-[#20437B] font-medium hover:underline">View All</NuxtLink>
+      <div class="space-y-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="p-5 flex justify-between items-center border-b border-gray-100">
+            <h2 class="font-bold text-gray-900">Best Sellers</h2>
+            <NuxtLink to="/admin/products" class="text-sm text-[#20437B] font-medium hover:underline">View All</NuxtLink>
+          </div>
+          <ul class="divide-y divide-gray-100">
+            <li
+              v-for="item in bestSellers"
+              :key="item.id"
+              class="p-4 flex items-center gap-3 hover:bg-gray-50/50"
+            >
+              <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden shrink-0">
+                <img v-if="item.imageUrl" :src="item.imageUrl" :alt="item.name" class="w-full h-full object-contain">
+                <span v-else class="text-xl">📦</span>
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="font-medium text-gray-900 truncate">{{ item.name }}</p>
+                <p class="text-xs text-gray-500">{{ item.price }} · Sales {{ item.sales }}</p>
+              </div>
+            </li>
+          </ul>
         </div>
-        <ul class="divide-y divide-gray-100">
-          <li
-            v-for="item in bestSellers"
-            :key="item.id"
-            class="p-4 flex items-center gap-3 hover:bg-gray-50/50"
-          >
-            <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden shrink-0">
-              <img v-if="item.imageUrl" :src="item.imageUrl" :alt="item.name" class="w-full h-full object-contain">
-              <span v-else class="text-xl">📦</span>
-            </div>
-            <div class="min-w-0 flex-1">
-              <p class="font-medium text-gray-900 truncate">{{ item.name }}</p>
-              <p class="text-xs text-gray-500">{{ item.price }} · Sales {{ item.sales }}</p>
-            </div>
-          </li>
-        </ul>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+          <div class="p-5 flex justify-between items-center border-b border-gray-100">
+            <h2 class="font-bold text-gray-900">Subscribers</h2>
+            <NuxtLink to="/admin/subscribe" class="text-sm text-[#20437B] font-medium hover:underline">View All</NuxtLink>
+          </div>
+          <ul class="divide-y divide-gray-100">
+            <li
+              v-for="sub in recentSubscribers"
+              :key="sub.id"
+              class="p-4 flex items-center gap-3 hover:bg-gray-50/50"
+            >
+              <div class="w-10 h-10 rounded-full bg-[#D3DDFF]/50 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[#20437B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="font-medium text-gray-900 truncate">{{ sub.email }}</p>
+                <p class="text-xs text-gray-500">{{ formatSubscriberDate(sub.subscribedAt) }}</p>
+              </div>
+            </li>
+          </ul>
+          <p v-if="recentSubscribers.length === 0" class="p-4 text-center text-sm text-gray-500">No subscribers yet</p>
+        </div>
       </div>
     </div>
 
@@ -204,20 +228,30 @@ const {
   salesChart,
   salesChartYear,
   salesTotal,
-  salesChange,
   ordersChart,
   recentTransactions,
   bestSellers,
   lowStockProducts
 } = useAdminDashboard()
 
+const { subscribers } = useSubscribers()
+const recentSubscribers = computed(() => [...subscribers.value].slice(-5).reverse())
+
+function formatSubscriberDate(iso: string) {
+  try {
+    return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
+  } catch {
+    return iso
+  }
+}
+
 const statCards = computed(() => {
   const s = stats.value
   return [
-    { label: 'Total Users', value: s.totalUsers, change: s.totalUsersChange, icon: 'user' },
-    { label: 'Total Orders', value: s.totalOrders, change: s.totalOrdersChange, icon: 'orders' },
-    { label: 'Total Delivered', value: s.totalDelivered, change: s.totalDeliveredChange, icon: 'box' },
-    { label: 'Total Sales', value: s.totalSales, change: s.totalSalesChange, icon: 'chart' }
+    { label: 'Total Users', value: s.totalUsers, icon: 'user' },
+    { label: 'Total Orders', value: s.totalOrders, icon: 'orders' },
+    { label: 'Total Delivered', value: s.totalDelivered, icon: 'box' },
+    { label: 'Total Sales', value: s.totalSales, icon: 'chart' }
   ]
 })
 
@@ -225,6 +259,20 @@ function barHeight(data: { value: number }[], point: { value: number }) {
   const max = Math.max(...data.map(d => d.value), 1)
   return Math.round((point.value / max) * 100)
 }
+
+const salesLinePoints = computed(() => {
+  const data = salesChart.value
+  if (!data?.length) return ''
+  const max = Math.max(...data.map(d => d.value), 1)
+  const pad = 8
+  const w = 200 - pad * 2
+  const h = 120 - pad * 2
+  return data.map((p, i) => {
+    const x = pad + (data.length > 1 ? (i / (data.length - 1)) * w : w / 2)
+    const y = pad + h - (p.value / max) * h
+    return `${x},${y}`
+  }).join(' ')
+})
 
 useHead({ title: "Admin Dashboard | Kathie's Kitchen" })
 </script>

@@ -47,7 +47,7 @@
       </form>
     </div>
     <div class="w-full flex justify-center items-stretch">
-      <div class="w-full rounded-3xl overflow-hidden shadow-lg bg-white aspect-[4/3] min-h-[280px] flex items-center justify-center">
+      <div class="w-full overflow-hidden shadow-lg bg-white aspect-[4/3] min-h-[280px] flex items-center justify-center">
         <iframe
           v-if="contactSection?.mapEmbedUrl"
           :src="contactSection.mapEmbedUrl"

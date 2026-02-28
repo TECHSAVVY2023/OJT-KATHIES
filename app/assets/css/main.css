@@ -2,3 +2,31 @@ html,
 body {
   font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
 }
+
+/* Premium scrollbar – slim, refined design */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0.5);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, rgba(30, 58, 95, 0.4) 0%, rgba(8, 61, 109, 0.5) 50%, rgba(6, 42, 77, 0.6) 100%);
+  border-radius: 9999px;
+  min-height: 40px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, rgba(30, 58, 95, 0.6) 0%, rgba(8, 61, 109, 0.75) 50%, rgba(6, 42, 77, 0.9) 100%);
+}
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(135deg, #1e3a5f 0%, #083d6d 50%, #062a4d 100%);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(30, 58, 95, 0.5) transparent;
+}

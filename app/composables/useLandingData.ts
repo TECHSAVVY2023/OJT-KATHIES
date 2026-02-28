@@ -9,6 +9,7 @@ export function useLandingData() {
     landing: readonly(landing),
     header: computed(() => landing.value.header),
     heroSection: computed(() => landing.value.heroSection),
+    aboutSection: computed(() => landing.value.aboutSection),
     whyChooseUs: computed(() => landing.value.whyChooseUs),
     topCategories: computed(() => landing.value.topCategories),
     newArrivals: computed(() => landing.value.newArrivals),

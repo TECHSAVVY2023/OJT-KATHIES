@@ -9,9 +9,9 @@
       </p>
       <NuxtLink
         :to="heroSection?.ctaButton?.path ?? '/products'"
-        class="inline-block px-8 py-3 bg-white text-[#083D6D] font-bold rounded-lg border-2 border-[#083D6D] shadow hover:bg-gray-50"
+        class="hero-cta-btn inline-block relative px-8 py-3 bg-white text-[#083D6D] font-bold rounded-lg border-2 border-[#083D6D] shadow transition-all duration-300 overflow-hidden"
       >
-        {{ heroSection?.ctaButton?.label }}
+        <span class="relative z-10">{{ heroSection?.ctaButton?.label }}</span>
       </NuxtLink>
       <div class="relative max-w-5xl mx-auto mt-12 px-14">
         <div class="overflow-hidden">
@@ -84,3 +84,40 @@ const heroCarouselMaxIndex = computed(() =>
   Math.max(0, heroCarouselItems.value.length - heroCarouselVisible)
 )
 </script>
+
+<style scoped>
+.hero-cta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(6, 42, 77, 0.7),
+    transparent
+  );
+  z-index: 1;
+  pointer-events: none;
+  animation: hero-shine-interval 3s ease-in-out infinite;
+}
+.hero-cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5), 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+.hero-cta-btn:hover::before {
+  animation: hero-shine-hover 0.6s ease-out forwards;
+}
+@keyframes hero-shine-interval {
+  0% { left: -100%; }
+  12% { left: 150%; }
+  13% { left: -100%; }
+  100% { left: -100%; }
+}
+@keyframes hero-shine-hover {
+  0% { left: -100%; }
+  100% { left: 150%; }
+}
+</style>
