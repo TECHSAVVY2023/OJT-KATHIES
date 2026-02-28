@@ -222,11 +222,11 @@
   },
   "aboutSection": {
     "images": [
-      "/images/flip.png",
-      "/images/ask.png",
-      "/images/h1.png",
-      "/images/hero4.png",
-      "/images/hero5.png"
+      "/images/1.png",
+      "/images/2.png",
+      "/images/3.png",
+      "/images/4.png",
+      "/images/1.png"
     ]
   },
   "faqSection": {
