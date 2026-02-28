@@ -146,7 +146,7 @@
       <div class="space-y-6">
         <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
           <div class="p-5 flex justify-between items-center border-b border-gray-100">
-            <h2 class="font-bold text-gray-900">Best Sellers</h2>
+            <h2 class="font-bold text-gray-900">{{ bestSellers.length === 1 ? 'Best Seller' : 'Best Sellers' }}</h2>
             <NuxtLink to="/admin/products" class="text-sm text-[#20437B] font-medium hover:underline">View All</NuxtLink>
           </div>
           <ul class="divide-y divide-gray-100">

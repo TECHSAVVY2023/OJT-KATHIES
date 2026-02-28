@@ -98,7 +98,7 @@
             </button>
           </form>
           <!-- Right: Google Maps embed, or map image, or placeholder -->
-          <div class="bg-white rounded-3xl shadow-lg overflow-hidden min-h-[320px] aspect-[4/3] flex items-center justify-center">
+          <div class="bg-white shadow-lg overflow-hidden min-h-[320px] aspect-[4/3] flex items-center justify-center">
             <iframe
               v-if="contactSection?.mapEmbedUrl"
               :src="contactSection.mapEmbedUrl"
