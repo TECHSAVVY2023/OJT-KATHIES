@@ -1,9 +1,14 @@
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
 html,
 body {
   font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
-/* Premium scrollbar – slim, refined design */
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
