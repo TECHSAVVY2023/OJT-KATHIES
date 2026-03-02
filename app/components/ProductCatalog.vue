@@ -7,7 +7,7 @@
       ref="filterSidebar"
       class="filter-sidebar w-full shrink-0 lg:shrink-0 rounded-2xl border border-[#0F76D3]/15 bg-white shadow-lg shadow-[#083D6D]/8 transition-[width] lg:w-52 xl:w-56 lg:fixed lg:top-24 lg:z-40"
       :class="filterOpen ? '' : 'lg:w-14'"
-      :style="filterStyle"
+      :style="Object.keys(sidebarStyle).length > 0 ? sidebarStyle : filterStyle"
     >
       <!-- Toggle -->
       <button
@@ -342,16 +342,21 @@ const PAGE_SIZE = 12
 const filterSidebar = ref<HTMLElement | null>(null)
 const filterHeight = ref(0)
 const maxFilterHeight = ref('calc(100vh - 8rem)')
+const sidebarStyle = ref({})
+const isAtFooter = ref(false)
 
 onMounted(() => {
   const cat = route.query.category as string
   if (cat) selectedCategories.value = [decodeURIComponent(cat)]
   updateFilterHeight()
   window.addEventListener('resize', updateFilterHeight)
+  window.addEventListener('scroll', handleScroll)
+  handleScroll() // Initial check
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', updateFilterHeight)
+  window.removeEventListener('scroll', handleScroll)
 })
 
 watch(filterOpen, () => {
@@ -362,6 +367,45 @@ function updateFilterHeight() {
   if (filterSidebar.value) {
     filterHeight.value = filterSidebar.value.offsetHeight
     maxFilterHeight.value = `calc(100vh - 8rem)`
+    handleScroll() // Recalculate position
+  }
+}
+
+function handleScroll() {
+  if (!filterSidebar.value) return
+  
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+  const sidebarHeight = filterSidebar.value.offsetHeight
+  
+  // Get the footer's position
+  const footer = document.querySelector('footer')
+  if (!footer) return
+  
+  const footerRect = footer.getBoundingClientRect()
+  const footerTop = footerRect.top + scrollTop
+  const marginFromFooter = 30 // 30px buffer from footer
+  
+  // Calculate where the sidebar should stop
+  const stopPosition = footerTop - sidebarHeight - marginFromFooter
+  
+  // Get the catalog root container
+  const catalogRoot = document.querySelector('.catalog-root')
+  if (!catalogRoot) return
+  
+  const catalogRect = catalogRoot.getBoundingClientRect()
+  const catalogTop = catalogRect.top + scrollTop
+  
+  // Only apply absolute positioning if we've reached the stop point
+  if (scrollTop >= stopPosition) {
+    isAtFooter.value = true
+    // Position relative to the catalog container
+    sidebarStyle.value = {
+      position: 'absolute',
+      top: `${stopPosition - catalogTop}px`
+    }
+  } else {
+    isAtFooter.value = false
+    sidebarStyle.value = {}
   }
 }
 

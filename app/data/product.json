@@ -15,7 +15,7 @@
     "defaultQuantity": 1,
     "description": "Rich and hearty tuna in caldereta sauce. A Filipino favorite perfect with rice or bread.",
     "stockCount": 24,
-    "isBestSeller": false
+    "isBestSeller": true
   },
   {
     "id": "prod-002",
