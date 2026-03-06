@@ -47,6 +47,7 @@
                 <div class="flip-image-frame">
                   <img
                     v-if="!imgError"
+                    :key="flipped ? 'flipped' : 'front'"
                     :src="whyChooseUs?.centerImage || '/images/flip.png'"
                     alt="Kathie's Kitchen products"
                     class="flip-image"
@@ -235,7 +236,7 @@ const imgError = ref(false)
   align-items: center;
   justify-content: center;
   width: 310px;
-  height: 378px;
+  height: 310px;
   flex-shrink: 0;
 }
 
@@ -265,12 +266,13 @@ const imgError = ref(false)
   position: relative;
   z-index: 1;
   width: 264px;
-  height: 334px;
+  height: 264px;
   perspective: 1100px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
+  border-radius: 50%;
 }
 
 .flip-inner {
@@ -278,14 +280,14 @@ const imgError = ref(false)
   width: 100%; height: 100%;
   transform-style: preserve-3d;
   transition: transform 0.7s cubic-bezier(0.4,0.2,0.2,1);
-  border-radius: 22px;
+  border-radius: 50%;
 }
 .flip-inner.is-flipped { transform: rotateY(180deg); }
 
 .flip-face {
   position: absolute;
   inset: 0;
-  border-radius: 22px;
+  border-radius: 50%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   overflow: hidden;
@@ -304,7 +306,23 @@ const imgError = ref(false)
 }
 
 .flip-image-frame { width: 100%; height: 100%; overflow: hidden; }
-.flip-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.45s ease; }
+.flip-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: imgZoomOut 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform-origin: center center;
+}
+
+@keyframes imgZoomOut {
+  0%   { transform: scale(1.35); }
+  100% { transform: scale(1.0); }
+}
+
+/* Re-trigger animation on each flip-in by targeting the front face when not flipped */
+.flip-inner:not(.is-flipped) .flip-image {
+  animation: imgZoomOut 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
 .flip-trigger:hover .flip-image { transform: scale(1.04); }
 
 .flip-fallback {
@@ -344,39 +362,41 @@ const imgError = ref(false)
 }
 
 .flip-back-content {
-  padding: 28px 22px;
+  /* inscribed square of 264px circle ≈ 186px; use ~172px for comfortable breathing room */
+  width: 172px;
+  padding: 0;
   text-align: center;
   display: flex; flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
-.back-icon  { font-size: 32px; }
-.back-title { font-size: 17px; font-weight: 700; color: #fff; margin: 0; letter-spacing: -0.02em; }
+.back-icon  { font-size: 26px; line-height: 1; }
+.back-title { font-size: 14px; font-weight: 700; color: #fff; margin: 0; letter-spacing: -0.02em; }
 .back-tagline {
-  font-size: 10px; font-weight: 500;
+  font-size: 8.5px; font-weight: 500;
   letter-spacing: 0.07em; text-transform: uppercase;
   color: rgba(255,255,255,0.5); margin: 0;
 }
 .back-divider {
-  width: 34px; height: 2px;
+  width: 28px; height: 2px;
   background: linear-gradient(90deg, #0F76D3, #CE1126);
-  border-radius: 2px; margin: 2px 0;
+  border-radius: 2px; margin: 1px 0;
 }
 .back-list {
   list-style: none; padding: 0; margin: 0;
   display: flex; flex-direction: column;
-  gap: 9px; text-align: left; width: 100%;
+  gap: 6px; text-align: left; width: 100%;
 }
 .back-item {
-  display: flex; align-items: flex-start; gap: 8px;
-  font-size: 11.5px; color: rgba(225,232,240,0.85); line-height: 1.5;
+  display: flex; align-items: flex-start; gap: 6px;
+  font-size: 10px; color: rgba(225,232,240,0.85); line-height: 1.45;
 }
 .back-bullet {
-  flex-shrink: 0; margin-top: 4px;
-  width: 5px; height: 5px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 3px;
+  width: 4px; height: 4px; border-radius: 50%;
   background: #CE1126;
-  box-shadow: 0 0 5px rgba(206,17,38,0.55);
+  box-shadow: 0 0 4px rgba(206,17,38,0.55);
 }
 
 /* ── Responsive ── */
@@ -389,8 +409,8 @@ const imgError = ref(false)
 
 @media (max-width: 520px) {
   .wcu-section { padding: 48px 0 44px; }
-  .flip-trigger { width: 230px; height: 292px; }
-  .flip-col { width: 268px; height: 322px; }
+  .flip-trigger { width: 230px; height: 230px; }
+  .flip-col { width: 268px; height: 268px; }
   .ring-1 { width: 248px; height: 248px; }
   .ring-2 { width: 296px; height: 296px; }
 }
