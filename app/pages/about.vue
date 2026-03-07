@@ -146,7 +146,7 @@
             Authentic Filipino groceries and snacks, delivered to your door.
           </p>
           <a
-            href="/shop"
+            href="/shop/all-products"
             class="inline-flex items-center gap-2 bg-[#083D6D] hover:bg-[#0F76D3] text-white font-semibold text-sm px-8 py-3.5 rounded-full transition-colors duration-200 tracking-wide"
           >
             Shop Now

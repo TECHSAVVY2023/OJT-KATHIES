@@ -32,15 +32,6 @@
             >
           </div>
 
-          <!-- Floating logo badge -->
-          <div class="faq-logo-badge">
-            <img
-              src="/images/logo.png"
-              alt="Kathie's Kitchen logo"
-              class="faq-logo-badge__img"
-            >
-          </div>
-
           <!-- Decorative dot grid -->
           <div class="faq-dot-grid">
             <span v-for="i in 25" :key="i" class="faq-dot" />
@@ -244,44 +235,6 @@ function toggleFaq(id: string) {
   to   { transform: rotate(360deg); }
 }
 
-/* ── Floating logo badge ── */
-.faq-logo-badge {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  z-index: 10;
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow:
-    0 8px 24px rgba(30,58,95,0.2),
-    0 2px 8px rgba(0,0,0,0.08),
-    0 0 0 4px rgba(30,58,95,0.06);
-  animation: badge-float 4s ease-in-out infinite;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
-}
-.faq-logo-badge:hover {
-  box-shadow:
-    0 12px 36px rgba(30,58,95,0.32),
-    0 4px 12px rgba(0,0,0,0.12),
-    0 0 0 5px rgba(30,58,95,0.12);
-  transform: scale(1.1);
-  animation-play-state: paused;
-}
-.faq-logo-badge__img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-}
-@keyframes badge-float {
-  0%, 100% { transform: translateY(0px) rotate(-2deg); }
-  50%       { transform: translateY(-8px) rotate(2deg); }
-}
 
 /* ── Dot grid decoration ── */
 .faq-dot-grid {

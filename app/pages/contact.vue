@@ -72,7 +72,7 @@
 
             <!-- Right: Map -->
             <div class="sticky top-24">
-              <div class="bg-white rounded-2xl border border-[#0F76D3]/12 shadow-sm shadow-[#083D6D]/4 overflow-hidden">
+              <div class="bg-white border border-[#0F76D3]/12 shadow-sm shadow-[#083D6D]/4 overflow-hidden">
                 <!-- Map label bar -->
                 <div class="px-5 py-4 border-b border-[#EDF3FF] flex items-center gap-3">
                   <div class="w-8 h-8 rounded-lg bg-[#EDF3FF] flex items-center justify-center flex-shrink-0">
