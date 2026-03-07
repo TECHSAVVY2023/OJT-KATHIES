@@ -18,29 +18,97 @@
           </div>
         </NuxtLink>
       </div>
-      <nav class="flex-1 py-4 px-3 overflow-y-auto space-y-1">
-        <NuxtLink
-          v-for="item in navItems"
-          :key="item.path"
-          :to="item.path"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors"
-          :class="isActive(item.path)
-            ? 'bg-[#D3DDFF] text-[#20437B] font-medium'
-            : 'text-[#20437B]/80 hover:bg-[#D3DDFF]/60 hover:text-[#20437B]'"
-        >
-          <span class="w-5 h-5 shrink-0 flex items-center justify-center" :class="isActive(item.path) ? 'text-[#20437B]' : 'text-[#20437B]/70'">
-            <svg v-if="item.icon === 'home'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-            <svg v-else-if="item.icon === 'chart'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-            <svg v-else-if="item.icon === 'products'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
-            <svg v-else-if="item.icon === 'coming-soon'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <svg v-else-if="item.icon === 'category'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
-            <svg v-else-if="item.icon === 'tag'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg>
-            <svg v-else-if="item.icon === 'list'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
-            <svg v-else-if="item.icon === 'user'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-            <svg v-else-if="item.icon === 'subscribe'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-          </span>
-          <span>{{ item.label }}</span>
-        </NuxtLink>
+      <nav class="flex-1 py-4 px-3 overflow-y-auto space-y-5">
+        <!-- Main -->
+        <div class="space-y-1">
+          <p class="px-4 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#20437B]/60">Main</p>
+          <NuxtLink
+            to="/admin"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors"
+            :class="isActive('/admin') && route.path === '/admin'
+              ? 'bg-[#D3DDFF] text-[#20437B] font-medium'
+              : 'text-[#20437B]/80 hover:bg-[#D3DDFF]/60 hover:text-[#20437B]'"
+          >
+            <span class="w-5 h-5 shrink-0 flex items-center justify-center" :class="isActive('/admin') && route.path === '/admin' ? 'text-[#20437B]' : 'text-[#20437B]/70'">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+            </span>
+            <span>Dashboard</span>
+          </NuxtLink>
+          <!-- Super Admin (expandable) -->
+          <div class="space-y-0.5">
+            <button
+              type="button"
+              class="flex w-full items-center gap-3 px-4 py-3 rounded-lg transition-colors text-left text-[#20437B]/80 hover:bg-[#D3DDFF]/60 hover:text-[#20437B]"
+              @click="superAdminOpen = !superAdminOpen"
+            >
+              <span class="w-5 h-5 shrink-0 flex items-center justify-center text-[#20437B]/70">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+              </span>
+              <span class="flex-1">Super Admin</span>
+              <svg class="w-4 h-4 shrink-0 transition-transform" :class="superAdminOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+            </button>
+            <div v-show="superAdminOpen" class="pl-8 space-y-0.5">
+              <NuxtLink
+                to="/admin/logs"
+                class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm"
+                :class="isActive('/admin/logs')
+                  ? 'bg-[#D3DDFF] text-[#20437B] font-medium'
+                  : 'text-[#20437B]/80 hover:bg-[#D3DDFF]/60 hover:text-[#20437B]'"
+              >
+                <span class="w-4 h-4 shrink-0 flex items-center justify-center" :class="isActive('/admin/logs') ? 'text-[#20437B]' : 'text-[#20437B]/70'">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                </span>
+                <span>Logs</span>
+              </NuxtLink>
+              <NuxtLink
+                to="/admin/customers"
+                class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm"
+                :class="isActive('/admin/customers')
+                  ? 'bg-[#D3DDFF] text-[#20437B] font-medium'
+                  : 'text-[#20437B]/80 hover:bg-[#D3DDFF]/60 hover:text-[#20437B]'"
+              >
+                <span class="w-4 h-4 shrink-0 flex items-center justify-center" :class="isActive('/admin/customers') ? 'text-[#20437B]' : 'text-[#20437B]/70'">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                </span>
+                <span>Customer</span>
+              </NuxtLink>
+              <NuxtLink
+                to="/admin/subscribe"
+                class="flex items-center gap-3 px-4 py-2.5 rounded-lg transition-colors text-sm"
+                :class="isActive('/admin/subscribe')
+                  ? 'bg-[#D3DDFF] text-[#20437B] font-medium'
+                  : 'text-[#20437B]/80 hover:bg-[#D3DDFF]/60 hover:text-[#20437B]'"
+              >
+                <span class="w-4 h-4 shrink-0 flex items-center justify-center" :class="isActive('/admin/subscribe') ? 'text-[#20437B]' : 'text-[#20437B]/70'">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                </span>
+                <span>Subscribers</span>
+              </NuxtLink>
+            </div>
+          </div>
+        </div>
+
+        <!-- Management -->
+        <div class="space-y-1">
+          <p class="px-4 py-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#20437B]/60">Management</p>
+          <NuxtLink
+            v-for="item in managementNavItems"
+            :key="item.path"
+            :to="item.path"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors"
+            :class="isActive(item.path)
+              ? 'bg-[#D3DDFF] text-[#20437B] font-medium'
+              : 'text-[#20437B]/80 hover:bg-[#D3DDFF]/60 hover:text-[#20437B]'"
+          >
+            <span class="w-5 h-5 shrink-0 flex items-center justify-center" :class="isActive(item.path) ? 'text-[#20437B]' : 'text-[#20437B]/70'">
+              <svg v-if="item.icon === 'products'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
+              <svg v-else-if="item.icon === 'coming-soon'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <svg v-else-if="item.icon === 'category'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+              <svg v-else-if="item.icon === 'list'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
+            </span>
+            <span>{{ item.label }}</span>
+          </NuxtLink>
+        </div>
       </nav>
       <!-- Logout in sidebar -->
       <div class="p-3 border-t border-[#D3DDFF] shrink-0">
@@ -215,14 +283,19 @@ function markAllMessagesRead() {
   adminMessages.value.forEach(m => { m.read = true })
 }
 
-const navItems = [
-  { label: 'Dashboard', path: '/admin', icon: 'home' },
+const superAdminOpen = ref(false)
+// Keep Super Admin expanded when on any of its child routes
+watch(() => route.path, (path) => {
+  if (path.startsWith('/admin/logs') || path.startsWith('/admin/customers') || path.startsWith('/admin/subscribe')) {
+    superAdminOpen.value = true
+  }
+}, { immediate: true })
+
+const managementNavItems = [
   { label: 'Products', path: '/admin/products', icon: 'products' },
   { label: 'Coming Soon Product', path: '/admin/coming-soon', icon: 'coming-soon' },
   { label: 'Category', path: '/admin/category', icon: 'category' },
-  { label: 'Order List', path: '/admin/orders', icon: 'list' },
-  { label: 'Customer', path: '/admin/customers', icon: 'user' },
-  { label: 'Subscribers', path: '/admin/subscribe', icon: 'subscribe' }
+  { label: 'Order List', path: '/admin/orders', icon: 'list' }
 ]
 
 const isActive = (path: string) => {
