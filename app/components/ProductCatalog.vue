@@ -20,7 +20,14 @@
         <span class="text-[#0F76D3] text-xs shrink-0 transition-transform duration-200" :class="filterOpen ? 'rotate-180' : 'lg:mx-auto'">▼</span>
       </button>
 
-      <div v-show="filterOpen" class="p-4 space-y-4 bg-white overflow-y-auto rounded-b-2xl" :style="filterContentStyle">
+      <div v-show="filterOpen" class="p-4 space-y-4 bg-white overflow-y-auto rounded-b-2xl" :style="filterContentStyle" @scroll="updateGradientPosition" style="-ms-overflow-style: none; scrollbar-width: none;" >
+
+        <!-- Gradient Scroll Indicator -->
+        <div 
+          class="gradient-indicator" 
+          :style="gradientStyle"
+          v-if="showGradientIndicator"
+        ></div>
 
         <!-- Applied -->
         <div class="space-y-2">
@@ -339,6 +346,9 @@ const filterOpen = ref(true)
 const currentPage = ref(1)
 const PAGE_SIZE = 12
 
+const gradientPosition = ref(50)
+const showGradientIndicator = ref(false)
+
 const filterSidebar = ref<HTMLElement | null>(null)
 const filterHeight = ref(0)
 const maxFilterHeight = ref('calc(100vh - 8rem)')
@@ -377,35 +387,43 @@ function handleScroll() {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop
   const sidebarHeight = filterSidebar.value.offsetHeight
   
-  // Get the footer's position
-  const footer = document.querySelector('footer')
-  if (!footer) return
-  
-  const footerRect = footer.getBoundingClientRect()
-  const footerTop = footerRect.top + scrollTop
-  const marginFromFooter = 30 // 30px buffer from footer
-  
-  // Calculate where the sidebar should stop
-  const stopPosition = footerTop - sidebarHeight - marginFromFooter
-  
-  // Get the catalog root container
+  // Get the catalog root container boundaries
   const catalogRoot = document.querySelector('.catalog-root')
   if (!catalogRoot) return
   
   const catalogRect = catalogRoot.getBoundingClientRect()
   const catalogTop = catalogRect.top + scrollTop
+  const catalogBottom = catalogRect.bottom + scrollTop
   
-  // Only apply absolute positioning if we've reached the stop point
-  if (scrollTop >= stopPosition) {
-    isAtFooter.value = true
-    // Position relative to the catalog container
+  // Calculate boundaries with smaller margins for more natural behavior
+  const topBoundary = catalogTop + 20 // 20px margin from top of catalog area
+  const bottomBoundary = catalogBottom - sidebarHeight - 20 // 20px margin from bottom
+  
+  // Natural movement within boundaries - no fixed positioning
+  if (scrollTop >= topBoundary && scrollTop <= bottomBoundary) {
+    // Within boundaries - move naturally with scroll
+    isAtFooter.value = false
     sidebarStyle.value = {
       position: 'absolute',
-      top: `${stopPosition - catalogTop}px`
+      top: `${scrollTop - catalogTop + 20}px`, // Move with scroll but stay within bounds
+      transition: 'none'
+    }
+  } else if (scrollTop > bottomBoundary) {
+    // Past bottom boundary - stop at bottom
+    isAtFooter.value = true
+    sidebarStyle.value = {
+      position: 'absolute',
+      top: `${bottomBoundary - catalogTop}px`,
+      transition: 'top 0.1s ease-out'
     }
   } else {
+    // Above top boundary - stop at top
     isAtFooter.value = false
-    sidebarStyle.value = {}
+    sidebarStyle.value = {
+      position: 'absolute',
+      top: '20px', // Stay at top of catalog container
+      transition: 'top 0.1s ease-out'
+    }
   }
 }
 
@@ -492,6 +510,40 @@ function paginationLink(page: number) {
   const q = { ...route.query, page: String(page) }
   return { path: '/products', query: q }
 }
+
+function updateGradientPosition(event: Event) {
+  const target = event.target as HTMLElement
+  const scrollTop = target.scrollTop
+  const scrollHeight = target.scrollHeight
+  const clientHeight = target.clientHeight
+  
+  // Calculate scroll percentage
+  const scrollPercentage = (scrollTop / (scrollHeight - clientHeight)) * 100
+  gradientPosition.value = Math.max(0, Math.min(100, scrollPercentage))
+  
+  // Show indicator only if content is scrollable
+  showGradientIndicator.value = scrollHeight > clientHeight
+}
+
+const gradientStyle = computed(() => ({
+  position: 'absolute' as const,
+  top: 0,
+  right: '2px',
+  width: '4px',
+  height: '100%',
+  background: `linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(15, 118, 211, 0.2) ${Math.max(0, gradientPosition.value - 10)}%,
+    rgba(15, 118, 211, 0.8) ${gradientPosition.value}%,
+    rgba(15, 118, 211, 0.2) ${Math.min(100, gradientPosition.value + 10)}%,
+    transparent 100%
+  )`,
+  borderRadius: '4px',
+  pointerEvents: 'none' as const,
+  transition: 'background 0.1s ease'
+}))
+
 </script>
 
 <style scoped>
@@ -506,11 +558,17 @@ function paginationLink(page: number) {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.filter-sidebar::-webkit-scrollbar { display: none; }
+.filter-sidebar::-webkit-scrollbar { 
+  display: none; 
+}
+
+.filter-sidebar .overflow-y-auto::-webkit-scrollbar {
+  display: none;
+}
 
 .filter-sidebar.lg\:fixed {
   position: fixed;
-  top: 6rem;
+  top: 8rem;
   margin-left: 0;
   z-index: 40;
   transition: width 0.3s ease;
