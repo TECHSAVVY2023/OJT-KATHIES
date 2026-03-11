@@ -5,7 +5,7 @@
     <aside
       v-if="selectedCategories.length > 0"
       ref="filterSidebar"
-      class="filter-sidebar w-full shrink-0 lg:shrink-0 rounded-2xl border border-[#0F76D3]/15 bg-white shadow-lg shadow-[#083D6D]/8 transition-[width] lg:w-52 xl:w-56 lg:fixed lg:top-24 lg:z-40"
+      class="filter-sidebar w-full shrink-0 lg:shrink-0 rounded-2xl border border-[#0F76D3]/15 bg-white shadow-lg shadow-[#083D6D]/8 transition-[width] lg:w-52 xl:w-56 lg:fixed lg:top-36 lg:z-40"
       :class="filterOpen ? '' : 'lg:w-14'"
       :style="Object.keys(sidebarStyle).length > 0 ? sidebarStyle : filterStyle"
     >
@@ -186,7 +186,7 @@
       </div>
 
       <!-- ══ STICKY TOOLBAR ══ -->
-      <div class="sticky top-16 z-20 mb-6 -mx-1 px-1">
+      <div class="sticky top-24 z-20 mb-6 -mx-1 px-1">
         <div class="bg-white/95 backdrop-blur-md border border-[#0F76D3]/12 rounded-2xl shadow-sm shadow-[#083D6D]/5 px-4 py-3 flex items-center gap-3">
 
           <!-- Search -->
@@ -351,7 +351,7 @@ const showGradientIndicator = ref(false)
 
 const filterSidebar = ref<HTMLElement | null>(null)
 const filterHeight = ref(0)
-const maxFilterHeight = ref('calc(100vh - 8rem)')
+const maxFilterHeight = ref('400px') // Fixed compact height
 const sidebarStyle = ref({})
 const isAtFooter = ref(false)
 
@@ -376,7 +376,7 @@ watch(filterOpen, () => {
 function updateFilterHeight() {
   if (filterSidebar.value) {
     filterHeight.value = filterSidebar.value.offsetHeight
-    maxFilterHeight.value = `calc(100vh - 8rem)`
+    maxFilterHeight.value = '400px' // Fixed compact height
     handleScroll() // Recalculate position
   }
 }
@@ -395,8 +395,12 @@ function handleScroll() {
   const catalogTop = catalogRect.top + scrollTop
   const catalogBottom = catalogRect.bottom + scrollTop
   
-  // Calculate boundaries with smaller margins for more natural behavior
-  const topBoundary = catalogTop + 20 // 20px margin from top of catalog area
+  // Detect navbar type and calculate appropriate offset
+  const landingHeader = document.querySelector('[class*="fixed top-0"]')
+  const navbarOffset = landingHeader ? 64 : 96 // LandingHeader = 64px, AppHeader = 96px
+  
+  // Calculate boundaries with navbar offset
+  const topBoundary = catalogTop + navbarOffset + 20 // navbar + 20px margin
   const bottomBoundary = catalogBottom - sidebarHeight - 20 // 20px margin from bottom
   
   // Natural movement within boundaries - no fixed positioning
@@ -405,7 +409,7 @@ function handleScroll() {
     isAtFooter.value = false
     sidebarStyle.value = {
       position: 'absolute',
-      top: `${scrollTop - catalogTop + 20}px`, // Move with scroll but stay within bounds
+      top: `${scrollTop - catalogTop + navbarOffset + 20}px`, // Move with scroll but stay within bounds
       transition: 'none'
     }
   } else if (scrollTop > bottomBoundary) {
@@ -417,11 +421,11 @@ function handleScroll() {
       transition: 'top 0.1s ease-out'
     }
   } else {
-    // Above top boundary - stop at top
+    // Above top boundary - stop at top with navbar offset
     isAtFooter.value = false
     sidebarStyle.value = {
       position: 'absolute',
-      top: '20px', // Stay at top of catalog container
+      top: `${navbarOffset + 20}px`, // Stay below navbar
       transition: 'top 0.1s ease-out'
     }
   }
@@ -568,7 +572,7 @@ const gradientStyle = computed(() => ({
 
 .filter-sidebar.lg\:fixed {
   position: fixed;
-  top: 8rem;
+  top: 9rem;
   margin-left: 0;
   z-index: 40;
   transition: width 0.3s ease;

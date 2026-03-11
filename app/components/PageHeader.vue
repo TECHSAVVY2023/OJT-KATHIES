@@ -12,6 +12,7 @@
           >
           <span v-else class="text-lg font-bold text-[#1e3a5f]">K</span>
         </div>
+        
         <span class="font-bold text-base sm:text-lg truncate">{{ header?.logo?.text }}</span>
       </NuxtLink>
       <nav class="hidden md:flex items-center gap-8">

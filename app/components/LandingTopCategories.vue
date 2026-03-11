@@ -47,7 +47,7 @@
           class="category-card"
           :style="{ '--delay': `${index * 65}ms` }"
         >
-          <NuxtLink :to="cat.path" class="card-inner">
+          <NuxtLink :to="`/categories?category=${encodeURIComponent(cat.name)}`" class="card-inner">
             <div class="card-image-wrap">
               <div class="image-ring-outer"></div>
               <div class="image-circle">

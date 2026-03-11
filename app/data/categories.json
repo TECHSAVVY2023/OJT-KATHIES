@@ -3,7 +3,7 @@
     "id": "cat-instant-noodles",
     "name": "Instant Noodles",
     "image": "/images/categories/instant-noodles.png",
-    "path": "/categories/instant-noodles",
+    "path": "images/categories/instant-noodles",
     "order": 25,
     "createdAt": "01-01-2025"
   },
