@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Cancelled – Kathie’s Kitchen</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #010024;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-wrapper {
+            max-width: 620px;
+            margin: 30px auto;
+            background: #ffffff;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 25px 20px;
+            border-bottom: 4px solid #FAB12F;
+        }
+
+        .header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #010024;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 8px 0;
+        }
+
+        .content {
+            padding: 30px 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #eee;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #FEF3E2;
+            color: #010024;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        .total {
+            text-align: right;
+            font-weight: bold;
+            padding-top: 10px;
+            border-top: 2px solid #FAB12F;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 13px;
+            color: #555;
+            background-color: #FEF3E2;
+            border-top: 1px solid #eee;
+        }
+
+        .footer a {
+            color: #010024;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #FAB12F;
+            color: #010024 !important;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-wrapper">
+        <div class="header">
+            <img src="https://kathieskitchen.com/images/kathieslogo.png" alt="Kathie’s Kitchen Logo">
+            <h2>Order Cancelled</h2>
+        </div>
+
+        <div class="content">
+            <p>Hi <strong>{{ order.customer_name }}</strong>,</p>
+            <p>We’re sorry to inform you that your order <strong>#{{ order.id }}</strong> has been cancelled.</p>
+
+            {% if items %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Price Each</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>R{{ item.price_each }}</td>
+                        <td>R{{ item.subtotal }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <p class="total">
+                Shipping Fee: R{{ order.shipping_fee }}<br>
+                <strong>Total: R{{ order.total_amount }}</strong>
+            </p>
+            {% endif %}
+
+            <p>If this was a mistake, please reply to this email immediately so we can help you fix it.</p>
+
+            <div style="text-align:center;">
+                <a href="https://kathieskitchen.com/" class="btn">Visit Kathie’s Kitchen</a>
+            </div>
+
+            <p style="margin-top:25px;">We hope to serve you again soon!<br>– Kathie’s Kitchen</p>
+        </div>
+
+        <div class="footer">
+            <p>Powered by <a href="https://techsavvies.space/" target="_blank">info@techsavvies.space</a></p>
+            <p>© {{ now|date:"Y" }} <a href="https://kathieskitchen.com/">Kathie’s Kitchen</a>. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+
+</html>
