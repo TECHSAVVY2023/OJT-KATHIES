@@ -12,7 +12,9 @@
             </div>
             <span class="font-bold text-[#20437B] text-lg">Kathie's Kitchen</span>
             <div class="mt-2 rounded px-2 py-1 text-[10px] font-semibold uppercase tracking-wide bg-white/80 border border-[#20437B]/15">
-              <span class="tagline-gradient-text">Bringing Home Closer, One Bite at a Time</span>
+              <span class="bg-gradient-to-r from-[#20437B] to-[#dc2626] bg-clip-text text-transparent">
+                Bringing Home Closer, One Bite at a Time
+              </span>
             </div>
             <span class="text-sm font-semibold text-[#20437B] mt-3 block">Admin Dashboard</span>
           </div>
@@ -310,12 +312,3 @@ const formattedDate = computed(() => {
   return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
 })
 </script>
-
-<style scoped>
-.tagline-gradient-text {
-  background: linear-gradient(to right, #20437B, #dc2626);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-</style>

@@ -40,7 +40,7 @@
         </div>
         <button
           type="submit"
-          class="w-full py-2.5 bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-sm font-semibold rounded-md uppercase tracking-wide"
+          class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-md uppercase tracking-wide"
         >
           {{ contactSection?.submitLabel }}
         </button>
@@ -53,7 +53,7 @@
           :src="contactSection.mapEmbedUrl"
           width="100%"
           height="100%"
-          style="border:0; min-height: 280px;"
+          style="border: 0"
           allowfullscreen
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
@@ -76,7 +76,7 @@
     class="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
   >
     <div class="bg-white rounded-xl shadow-xl max-w-sm w-[90%] p-6 text-center">
-      <h3 class="text-lg font-bold text-[#1e3a5f] mb-2">
+      <h3 class="text-lg font-bold text-blue-900 mb-2">
         Message sent successfully
       </h3>
       <p class="text-sm text-gray-600 mb-4">
@@ -84,7 +84,7 @@
       </p>
       <button
         type="button"
-        class="px-4 py-2 text-sm font-semibold text-white bg-[#2563eb] hover:bg-[#1d4ed8] rounded-md"
+        class="px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-md"
         @click="success = false"
       >
         OK

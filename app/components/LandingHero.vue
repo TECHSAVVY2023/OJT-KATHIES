@@ -1,31 +1,46 @@
 <template>
-  <section class="hero-section">
+  <section
+    class="hero-section relative flex min-h-screen items-center overflow-hidden bg-gradient-to-br from-[#061E35] via-[#083D6D] to-[#0F76D3] font-sans"
+  >
     <!-- Background layers -->
-    <div class="hero-bg" aria-hidden="true">
-      <div class="bg-orb orb-a"></div>
-      <div class="bg-orb orb-b"></div>
-      <div class="bg-orb orb-c"></div>
-      <div class="bg-grid"></div>
+    <div class="hero-bg pointer-events-none absolute inset-0" aria-hidden="true">
+      <div
+        class="bg-orb orb-a absolute h-[700px] w-[700px] rounded-full blur-[100px] bg-[radial-gradient(circle,rgba(15,118,211,0.25)_0%,transparent_70%)] -top-[200px] -right-[200px]"
+      ></div>
+      <div
+        class="bg-orb orb-b absolute h-[500px] w-[500px] rounded-full blur-[100px] bg-[radial-gradient(circle,rgba(8,61,109,0.6)_0%,transparent_70%)] -bottom-[150px] -left-[100px]"
+      ></div>
+      <div
+        class="bg-orb orb-c absolute h-[300px] w-[300px] rounded-full blur-[100px] bg-[radial-gradient(circle,rgba(200,50,58,0.12)_0%,transparent_70%)] top-[40%] right-[18%]"
+      ></div>
+      <div
+        class="bg-grid absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[length:60px_60px]"
+      ></div>
     </div>
 
-    <div class="hero-container">
-
+    <div
+      class="hero-container relative z-[1] mx-auto grid w-full max-w-[1280px] grid-cols-1 items-center gap-10 px-5 pb-20 pt-6 md:px-10 lg:grid-cols-[1fr,1.2fr] lg:gap-16"
+    >
       <!-- ── Left: Text block ── -->
-      <div class="hero-text">
-        <h1 class="hero-headline">
-          <span class="headline-line line-1">Bringing <span class="headline-accent">Home</span> Closer,</span>
-          <span class="headline-line line-2">One Bite at a Time</span>
+      <div class="hero-text flex flex-col gap-6">
+        <h1 class="hero-headline flex flex-col gap-1 text-left">
+          <span class="headline-line line-1 block text-[clamp(36px,4.5vw,62px)] font-extrabold leading-tight tracking-[-0.03em] text-slate-100">
+            Bringing <span class="headline-accent inline bg-gradient-to-r from-[#7DB8EC] via-[#E6EAED] via-[#4db8ff] to-[#C8323A] bg-clip-text text-transparent">Home</span> Closer,
+          </span>
+          <span class="headline-line line-2 block text-[clamp(36px,4.5vw,62px)] font-extrabold leading-tight tracking-[-0.03em] text-slate-100">
+            One Bite at a Time
+          </span>
         </h1>
 
-        <p class="hero-tagline">
+        <p class="hero-tagline max-w-md text-[15px] leading-relaxed text-slate-200/70">
           {{ heroSection?.tagline || 'Shop your favorite Filipino snacks, sauces, noodles and pantry staples — right from the comfort of your home.' }}
         </p>
 
         <!-- Shiny CTA -->
-        <div class="hero-cta-wrap">
+        <div class="hero-cta-wrap mt-2 flex flex-col gap-3">
           <NuxtLink
             :to="heroSection?.ctaButton?.path ?? '/products'"
-            class="hero-cta-btn"
+            class="hero-cta-btn relative inline-flex w-fit items-center overflow-hidden rounded-[14px] px-10 py-4 text-sm font-semibold tracking-[0.1em] uppercase text-white shadow-[0_0_0_1px_rgba(15,118,211,0.6),0_4px_24px_rgba(8,61,109,0.5)]"
           >
             <span class="btn-ring"></span>
             <span class="btn-bg"></span>
@@ -36,8 +51,8 @@
             <span class="btn-sparkle btn-sparkle-4"></span>
             <span class="btn-sparkle btn-sparkle-5"></span>
             <span class="btn-sparkle btn-sparkle-6"></span>
-            <span class="btn-label">
-              <svg class="btn-icon" viewBox="0 0 20 20" fill="none">
+            <span class="btn-label relative z-[10] flex items-center gap-2 text-[14px]">
+              <svg class="btn-icon h-[18px] w-[18px]" viewBox="0 0 20 20" fill="none">
                 <path d="M3 10h14M11 4l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
               {{ heroSection?.ctaButton?.label || 'Shop Now' }}
@@ -55,7 +70,7 @@
       </div>
 
       <!-- ── Right: Premium Carousel ── -->
-      <div class="carousel-section">
+        <div class="carousel-section flex flex-col gap-5">
 
         <!-- Section label + counter -->
         <div class="carousel-header">
@@ -147,7 +162,7 @@
         </div>
 
         <!-- Progress bar + dots -->
-        <div class="carousel-footer">
+        <div class="carousel-footer flex flex-col gap-2 px-2">
           <div class="progress-track">
             <div
               class="progress-fill"

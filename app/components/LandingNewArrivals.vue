@@ -1,18 +1,19 @@
 <template>
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-6 sm:px-8 lg:px-12">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-        <h2 class="text-2xl font-bold text-red-600 border-b-4 border-[#1e3a5f] pb-1">
+  <section class="bg-white py-16">
+    <div class="mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-12">
+      <div class="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <h2 class="border-b-4 border-[#1e3a5f] pb-1 text-2xl font-bold text-red-600">
           New Arrivals
         </h2>
         <input
           v-model="searchQuery"
           type="search"
           placeholder="Search Product"
-          class="px-4 py-2 border rounded-lg w-full sm:w-64"
+          class="w-full rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm outline-none transition focus:border-[#1e3a5f] focus:ring-2 focus:ring-[#1e3a5f]/20 sm:w-64"
         >
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+
+      <div class="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
         <ProductCard
           v-for="p in productsForDisplay"
           :key="p.id"

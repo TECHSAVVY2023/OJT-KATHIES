@@ -8,12 +8,7 @@
       <LandingNewArrivals />
       <LandingUpcomingStocks />
       <LandingSubscribe />
-      <!-- FAQ -->
-      <section id="faq" class="py-16 bg-gradient-to-br from-white via-[#eef3ff] to-white">
-        <div class="container mx-auto px-4">
-          <LandingFaq />
-        </div>
-      </section>
+      <LandingFaq />
     </div>
   </div>
 </template>

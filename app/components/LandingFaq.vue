@@ -1,21 +1,25 @@
 <template>
-  <div class="faq-section">
-
+  <section id="faq" class="bg-gradient-to-br from-white via-[#eef3ff] to-white py-16 lg:py-24">
+    <div class="faq-section mx-auto w-full max-w-5xl px-4">
     <!-- ── Section header ── -->
-    <div class="faq-header">
-      <p class="faq-header__eyebrow">Got Questions?</p>
-      <h2 class="faq-header__title">
-        <span class="faq-header__title--navy">Frequently Asked </span>
-        <span class="faq-header__title--red">Questions</span>
+    <div class="faq-header text-center mb-12 lg:mb-[52px]">
+      <p class="faq-header__eyebrow text-[11px] font-bold tracking-[0.18em] uppercase text-[#1e3a5f]/50 mb-2">
+        Got Questions?
+      </p>
+      <h2 class="faq-header__title text-[clamp(1.8rem,4vw,2.6rem)] font-black tracking-[-0.03em] leading-tight mb-2">
+        <span class="faq-header__title--navy text-[#1e3a5f]">Frequently Asked </span>
+        <span class="faq-header__title--red text-[#dc2626]">Questions</span>
       </h2>
-      <p class="faq-header__sub">Everything you need to know about Kathie's Kitchen.</p>
+      <p class="faq-header__sub text-sm text-slate-500">
+        Everything you need to know about Kathie's Kitchen.
+      </p>
     </div>
 
-    <div class="faq-grid">
+    <div class="faq-grid grid gap-12 items-start lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-14">
 
       <!-- ══ LEFT — Blob image ══ -->
-      <div class="faq-image-col">
-        <div class="faq-blob-wrap">
+      <div class="faq-image-col flex items-center justify-center">
+        <div class="faq-blob-wrap relative aspect-square w-full max-w-[560px] mx-auto">
 
           <!-- Decorative blob ring -->
           <div class="faq-blob-ring" />
@@ -41,21 +45,26 @@
       </div>
 
       <!-- ══ RIGHT — FAQ accordion ══ -->
-      <div class="faq-accordion-col">
-        <div class="faq-list">
+      <div class="faq-accordion-col flex flex-col gap-6 lg:gap-8">
+        <div class="faq-list flex flex-col gap-2.5">
           <div
             v-for="faq in faqSection?.faqs"
             :key="faq.id"
-            class="faq-item"
+            class="faq-item rounded-[14px] border border-slate-200 bg-white shadow-sm transition-transform"
             :class="{ 'faq-item--open': openId === faq.id }"
           >
             <button
               type="button"
-              class="faq-item__btn"
+              class="faq-item__btn flex w-full items-center gap-3 px-4 py-4 text-left"
               @click="toggleFaq(faq.id)"
             >
-              <span class="faq-item__question">{{ faq.question }}</span>
-              <span class="faq-item__icon" :class="{ 'faq-item__icon--open': openId === faq.id }">
+              <span class="faq-item__question flex-1 text-sm font-semibold text-slate-800">
+                {{ faq.question }}
+              </span>
+              <span
+                class="faq-item__icon flex h-7 w-7 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition"
+                :class="{ 'faq-item__icon--open': openId === faq.id }"
+              >
                 <svg viewBox="0 0 20 20" fill="none" class="w-4 h-4">
                   <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -79,10 +88,15 @@
         </div>
 
         <!-- CTA -->
-        <div class="faq-cta">
-          <p class="faq-cta__text">Can't find what you're looking for?</p>
-          <NuxtLink to="/contact" class="faq-cta__btn">
-            <svg viewBox="0 0 20 20" fill="none" class="w-4 h-4">
+        <div class="faq-cta mt-4 flex flex-wrap items-center gap-4">
+          <p class="faq-cta__text text-[0.84rem] text-slate-500">
+            Can't find what you're looking for?
+          </p>
+          <NuxtLink
+            to="/contact"
+            class="faq-cta__btn inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#1e3a5f] to-[#2a5298] px-5 py-2.5 text-[0.82rem] font-bold text-white shadow-md tracking-[0.02em]"
+          >
+            <svg viewBox="0 0 20 20" fill="none" class="h-4 w-4">
               <path d="M2.5 5.5A1.5 1.5 0 014 4h12a1.5 1.5 0 011.5 1.5v9A1.5 1.5 0 0116 16H4a1.5 1.5 0 01-1.5-1.5v-9z" stroke="currentColor" stroke-width="1.6"/>
               <path d="M2.5 6.5l7.5 5 7.5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
             </svg>
@@ -93,6 +107,7 @@
 
     </div>
   </div>
+</section>
 </template>
 
 <script setup lang="ts">
