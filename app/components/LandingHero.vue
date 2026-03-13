@@ -22,7 +22,16 @@ import HeroText from './HeroText.vue'
 import HeroCarousel from './HeroCarousel.vue'
 
 const { heroSection } = useLandingData()
-const heroCarouselItems = computed(() => heroSection.value?.carouselProducts ?? [])
+const heroCarouselItems = computed(() => {
+  const items = heroSection.value?.carouselProducts ?? [];
+  // Map to match Product interface
+  return items.map(item => ({
+    id: item.id,
+    name: item.name,
+    category: 'Featured', // default category
+    image: item.image || (item.images ? item.images[0] : undefined)
+  }));
+})
 </script>
 
 <style scoped>

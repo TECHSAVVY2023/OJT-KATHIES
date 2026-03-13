@@ -1,18 +1,26 @@
 <template>
   <section class="home-hero">
-    <HeroBackground />
+    <HeroBg />
 
     <div class="hero-inner">
       <!-- LEFT: Headline + tagline + CTA + trust -->
       <div class="hero-left">
-        <HeroText />
+        <HeroText 
+          tagline="Authentic Filipino flavors, crafted with love and delivered fresh to your doorstep."
+          ctaPath="/shop"
+          ctaLabel="Shop Now"
+        />
 
         <p class="hero-tagline">
           Authentic Filipino flavors, crafted with love and<br />
           delivered fresh to your doorstep.
         </p>
 
-        <HeroCtaButton @cta-click="$emit('cta-click')" />
+        <HeroCtaButton 
+          :to="'/shop'"
+          :label="'Shop Now'"
+          @cta-click="$emit('cta-click')"
+        />
 
         <div class="trust-row">
           <span class="trust-item"><span class="t-emoji">🇵🇭</span> <span class="t-label">Authentic</span></span>
@@ -35,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import HeroBackground from './HeroBackground.vue'
+import HeroBg from './HeroBg.vue'
 import HeroText from './HeroText.vue'
 import HeroCtaButton from './HeroCtaButton.vue'
 import HeroCarousel from './HeroCarousel.vue'

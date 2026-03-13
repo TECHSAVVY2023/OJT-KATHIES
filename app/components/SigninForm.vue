@@ -84,6 +84,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuth } from '~/composables/useAuth'
+
+const router = useRouter()
+const { login } = useAuth()
 
 const form = ref({
   email: '',
@@ -99,7 +104,13 @@ const emit = defineEmits<{
 }>()
 
 function onSubmit() {
-  emit('submit', form.value)
+  const result = login(form.value.email, form.value.password)
+  if (result.success) {
+    loginError.value = '';
+    router.push('/admin')
+  } else {
+    loginError.value = result.error || 'Invalid email or password.'
+  }
 }
 
 function signInWithGoogle() {
