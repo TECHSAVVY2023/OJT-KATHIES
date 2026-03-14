@@ -43,10 +43,10 @@
 </template>
 
 <script setup lang="ts">
-import HeroBg from './HeroBg.vue'
-import HeroText from './HeroText.vue'
-import HeroCtaButton from './HeroCtaButton.vue'
-import HeroCarousel from './HeroCarousel.vue'
+import HeroBg from '../customer/HeroBg.vue'
+import HeroText from '../customer/HeroText.vue'
+import HeroCtaButton from '../customer/HeroCtaButton.vue'
+import HeroCarousel from '../customer/HeroCarousel.vue'
 
 interface Product {
   id: string

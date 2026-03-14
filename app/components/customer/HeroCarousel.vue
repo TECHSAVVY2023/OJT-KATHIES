@@ -66,8 +66,8 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import HeroCarouselCard from './HeroCarouselCard.vue'
-import HeroCarouselNavigation from './HeroCarouselNavigation.vue'
+import HeroCarouselCard from '../customer/HeroCarouselCard.vue'
+import HeroCarouselNavigation from '../customer/HeroCarouselNavigation.vue'
 
 interface Product {
   id: string

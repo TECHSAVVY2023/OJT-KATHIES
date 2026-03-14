@@ -10,9 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import SubscribeNotifications from './SubscribeNotifications.vue'
-import SubscribePhone from './SubscribePhone.vue'
-import SubscribeDecorativeCircles from './SubscribeDecorativeCircles.vue'
+import SubscribeNotifications from '../customer/SubscribeNotifications.vue'
+import SubscribePhone from '../customer/SubscribePhone.vue'
+import SubscribeDecorativeCircles from '../customer/SubscribeDecorativeCircles.vue'
 </script>
 
 <style scoped>

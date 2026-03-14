@@ -13,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import SubscribeBackground from './SubscribeBackground.vue'
-import SubscribeContent from './SubscribeContent.vue'
-import SubscribePhoneMockup from './SubscribePhoneMockup.vue'
+import SubscribeBackground from '../customer/SubscribeBackground.vue'
+import SubscribeContent from '../customer/SubscribeContent.vue'
+import SubscribePhoneMockup from '../customer/SubscribePhoneMockup.vue'
 </script>
 
 <style scoped>

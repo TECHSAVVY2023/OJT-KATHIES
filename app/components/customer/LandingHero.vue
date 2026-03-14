@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import HeroBg from './HeroBg.vue'
-import HeroText from './HeroText.vue'
-import HeroCarousel from './HeroCarousel.vue'
+import HeroBg from '../customer/HeroBg.vue'
+import HeroText from '../customer/HeroText.vue'
+import HeroCarousel from '../customer/HeroCarousel.vue'
 
 const { heroSection } = useLandingData()
 const heroCarouselItems = computed(() => {

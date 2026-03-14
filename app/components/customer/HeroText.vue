@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import HeroCtaButton from './HeroCtaButton.vue'
-import HeroTrustBadges from './HeroTrustBadges.vue'
+import HeroCtaButton from '../customer/HeroCtaButton.vue'
+import HeroTrustBadges from '../customer/HeroTrustBadges.vue'
 
 defineProps<{
   tagline: string

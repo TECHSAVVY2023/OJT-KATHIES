@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import SubscribeForm from './SubscribeForm.vue'
+import SubscribeForm from '../customer/SubscribeForm.vue'
 </script>
 
 <style scoped>
