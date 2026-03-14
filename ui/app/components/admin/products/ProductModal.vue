@@ -45,7 +45,7 @@
             </div>
             <!-- Right: Upload Image (circular) -->
             <div class="flex flex-col items-center justify-center shrink-0">
-              <ProductImage 
+              <AdminProductImage 
                 :src="form.imageUrl" 
                 :alt="form.name" 
                 mode="upload"

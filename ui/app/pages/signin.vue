@@ -29,4 +29,22 @@
 
 <script setup lang="ts">
 // Components are now in app/components/
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuth } from '~/composables/useAuth'
+
+const router = useRouter()
+const { login } = useAuth()
+
+function onSubmit(form: any) {
+  const result = login(form.email, form.password)
+  if (result.success) {
+    router.push('/admin')
+  }
+}
+
+function signInWithGoogle() {
+  // Handle Google sign-in logic here
+  console.log('Google sign-in not implemented yet')
+}
 </script>

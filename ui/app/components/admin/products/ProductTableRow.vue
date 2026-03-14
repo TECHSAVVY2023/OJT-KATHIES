@@ -2,7 +2,7 @@
   <tr class="border-t border-[#D3DDFF]/60 hover:bg-[#D3DDFF]/20 transition-colors">
     <!-- Product Image -->
     <td class="px-4 py-3">
-      <ProductImage :src="product.imageUrl" :alt="product.name" mode="display" />
+      <AdminProductImage :src="product.imageUrl" :alt="product.name" mode="display" />
     </td>
     
     <!-- Product Name -->

@@ -40,7 +40,7 @@
             </div>
             <!-- Right: Image (circular, read-only) -->
             <div class="flex flex-col items-center justify-center shrink-0">
-              <ProductImage 
+              <AdminProductImage 
                 :src="product.imageUrl" 
                 :alt="product.name" 
                 mode="circular-display"
