@@ -4,6 +4,20 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
   css: ['~/assets/css/main.css'],
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+    {
+      path: '~/components/customer',
+      pathPrefix: false,
+    },
+    {
+      path: '~/components/admin',
+      pathPrefix: false,
+    },
+  ],
   app: {
     head: {
       meta: [
