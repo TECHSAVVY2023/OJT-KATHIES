@@ -133,18 +133,24 @@
             <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
             <textarea v-model="form.description" rows="4" class="w-full px-3 py-2 border border-[#D3DDFF] rounded-lg focus:ring-2 focus:ring-[#20437B]/30 outline-none" placeholder="Short description..."></textarea>
           </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Image Path</label>
+            <input
+              v-model="form.productImage"
+              type="text"
+              class="w-full px-3 py-2 border border-[#D3DDFF] rounded-lg focus:ring-2 focus:ring-[#20437B]/30 outline-none"
+              placeholder="/images/products/..."
+            />
+          </div>
         </div>
         <div class="flex flex-col items-center justify-center shrink-0">
-          <label class="cursor-pointer block">
-            <input ref="imageInputRef" type="file" accept="image/*" class="hidden" @change="onImageSelect">
-            <div class="w-40 h-40 rounded-full border-2 border-dashed border-[#D3DDFF] flex flex-col items-center justify-center gap-2 hover:border-[#20437B]/50 hover:bg-[#D3DDFF]/20 transition-colors overflow-hidden">
-              <img v-if="form.productImage" :src="form.productImage" alt="Product" class="w-full h-full object-cover">
-              <template v-else>
-                <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                <span class="text-sm text-gray-500">Upload Image</span>
-              </template>
-            </div>
-          </label>
+          <div class="w-40 h-40 rounded-full border-2 border-dashed border-[#D3DDFF] flex flex-col items-center justify-center gap-2 hover:border-[#20437B]/50 hover:bg-[#D3DDFF]/20 transition-colors overflow-hidden">
+            <img v-if="form.productImage" :src="form.productImage" alt="Product" class="w-full h-full object-cover">
+            <template v-else>
+              <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              <span class="text-sm text-gray-500">Paste an image path</span>
+            </template>
+          </div>
         </div>
       </div>
     </form>
@@ -154,7 +160,7 @@
 <script setup lang="ts">
 import type { UpcomingStockItem } from '~/types/catalog'
 
-const { upcomingStocks, addUpcomingStock, updateUpcomingStock, deleteUpcomingStock, nextUpcomingId } = useUpcomingStocksData()
+const { upcomingStocks, addUpcomingStock, updateUpcomingStock, deleteUpcomingStock, nextUpcomingId, refresh } = useUpcomingStocksData()
 
 const productColumns = [
   { key: 'image', label: 'Image', class: 'w-20' },
@@ -168,6 +174,10 @@ const showModal = ref(false)
 const editingItem = ref<UpcomingStockItem | null>(null)
 const viewingItem = ref<UpcomingStockItem | null>(null)
 
+onMounted(() => {
+  refresh()
+})
+
 const defaultForm = () => ({
   productName: '',
   description: '',
@@ -175,19 +185,6 @@ const defaultForm = () => ({
 })
 
 const form = ref(defaultForm())
-const imageInputRef = ref<HTMLInputElement | null>(null)
-
-function onImageSelect(e: Event) {
-  const input = e.target as HTMLInputElement
-  const file = input.files?.[0]
-  if (!file || !file.type.startsWith('image/')) return
-  const reader = new FileReader()
-  reader.onload = () => {
-    form.value.productImage = reader.result as string
-  }
-  reader.readAsDataURL(file)
-  input.value = ''
-}
 
 function productName(item: UpcomingStockItem) {
   return item.productFlavor ? `${item.productBrand} ${item.productFlavor}` : item.productBrand
@@ -240,6 +237,11 @@ function saveItem() {
       productFlavor: '',
       productImage: image,
       description
+    }).then(() => {
+      refresh()
+    }).catch((error) => {
+      console.error('Failed to update coming soon product:', error)
+      alert('Failed to update product. Please try again.')
     })
   } else {
     addUpcomingStock({
@@ -250,6 +252,11 @@ function saveItem() {
       description,
       buttonText: 'Upcoming Stock',
       buttonPath: '/products'
+    }).then(() => {
+      refresh()
+    }).catch((error) => {
+      console.error('Failed to add coming soon product:', error)
+      alert('Failed to add product. Please try again.')
     })
   }
   closeModal()
@@ -259,7 +266,12 @@ function confirmDelete(item: UpcomingStockItem) {
   if (!import.meta.client) return
   const name = productName(item)
   if (confirm(`Delete "${name}"? This will remove it from the list.`)) {
-    deleteUpcomingStock(item.id)
+    deleteUpcomingStock(item.id).then(() => {
+      refresh()
+    }).catch((error) => {
+      console.error('Failed to delete coming soon product:', error)
+      alert('Failed to delete product. Please try again.')
+    })
   }
 }
 

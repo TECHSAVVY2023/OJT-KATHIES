@@ -59,7 +59,7 @@
       </div>
       <button
         type="submit"
-        class="w-full py-3 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors"
+        class="w-full py-3 bg-blue-900 hover:bg-gray-800 text-white font-semibold rounded-lg transition-colors"
       >
         Sign in
       </button>
@@ -79,6 +79,13 @@
       </svg>
       Sign in with Google
     </button>
+
+    <p class="text-center text-gray-600 mt-6">
+      Don't have an account?
+      <NuxtLink to="/signup" class="text-[#1e3a5f] font-medium hover:underline">
+        Sign up here
+      </NuxtLink>
+    </p>
   </div>
 </template>
 
@@ -103,10 +110,10 @@ const emit = defineEmits<{
   signInWithGoogle: []
 }>()
 
-function onSubmit() {
-  const result = login(form.value.email, form.value.password)
+async function onSubmit() {
+  const result = await login(form.value.email, form.value.password)
   if (result.success) {
-    loginError.value = '';
+    loginError.value = ''
     router.push('/admin')
   } else {
     loginError.value = result.error || 'Invalid email or password.'

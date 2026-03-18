@@ -178,12 +178,16 @@ import type { UpcomingStockItem } from '~/types/catalog'
 
 definePageMeta({ layout: 'admin' })
 
-const { upcomingStocks, addUpcomingStock, updateUpcomingStock, deleteUpcomingStock, nextUpcomingId } = useUpcomingStocksData()
+const { upcomingStocks, addUpcomingStock, updateUpcomingStock, deleteUpcomingStock, nextUpcomingId, refresh } = useUpcomingStocksData()
 
 const searchQuery = ref('')
 const showModal = ref(false)
 const editingItem = ref<UpcomingStockItem | null>(null)
 const viewingItem = ref<UpcomingStockItem | null>(null)
+
+onMounted(() => {
+  refresh()
+})
 
 const defaultForm = () => ({
   productName: '',

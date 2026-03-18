@@ -50,6 +50,12 @@
           <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
         </svg>
       </div>
+      <button
+        @click="handleLogout"
+        class="px-3 py-1.5 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-colors"
+      >
+        Logout
+      </button>
       <div class="flex items-center gap-1.5 pl-1 border-l border-[#D3DDFF]">
         <svg class="w-5 h-5 text-[#20437B]/50 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -61,6 +67,7 @@
 </template>
 
 <script setup lang="ts">
+import { navigateTo } from 'nuxt/app'
 interface Notification {
   id: string
   text: string
@@ -89,7 +96,12 @@ const emit = defineEmits<{
   'toggle-messages': []
 }>()
 
-const { user } = useAuth()
+const { user, logout } = useAuth()
+
+const handleLogout = async () => {
+  await logout()
+  await navigateTo('/signin')
+}
 
 const markNotificationRead = (id: string) => {
   const notification = props.notifications.find(n => n.id === id)

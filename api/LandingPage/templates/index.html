@@ -4,136 +4,254 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kathie's Kitchen API</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+:root {
+  --blue-deep:   #020c1b;
+  --blue-mid:    #0a2a6e;
+  --blue-bright: #1652f0;
+  --blue-glow:   #4d8fff;
+  --blue-light:  #a8c8ff;
+  --white:       #ffffff;
+  --glass-bg:    rgba(255,255,255,0.06);
+  --glass-border:rgba(255,255,255,0.14);
+}
+
+/* ── Background ── */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg,
+    #020c1b 0%,
+    #0a1f5c 25%,
+    #0d3b8e 50%,
+    #1652f0 75%,
+    #3b82f6 100%);
+  background-size: 400% 400%;
+  animation: bgShift 10s ease infinite;
 }
 
+@keyframes bgShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Floating orbs ── */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  animation: floatOrb linear infinite;
+  pointer-events: none;
+}
+.orb-1 { width:420px; height:420px; background:#1652f0; top:-120px; left:-100px; animation-duration:18s; }
+.orb-2 { width:320px; height:320px; background:#3b82f6; bottom:-80px; right:-80px; animation-duration:14s; animation-delay:-5s; }
+.orb-3 { width:200px; height:200px; background:#60a5fa; top:40%; left:60%; animation-duration:22s; animation-delay:-9s; }
+
+@keyframes floatOrb {
+  0%   { transform: translate(0,0) scale(1); }
+  33%  { transform: translate(40px,-30px) scale(1.1); }
+  66%  { transform: translate(-20px,50px) scale(0.95); }
+  100% { transform: translate(0,0) scale(1); }
+}
+
+/* ── Particle dots ── */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--blue-light);
+  border-radius: 50%;
+  opacity: 0;
+  animation: risePart linear infinite;
+}
+@keyframes risePart {
+  0%   { transform: translateY(100vh) scale(0); opacity:0; }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-10vh) scale(1.5); opacity:0; }
+}
+
+/* ── Container ── */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 860px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
+/* ── Hero card ── */
 .hero-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 3rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    transform: translateY(0);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  padding: 3.5rem 3rem;
+  text-align: center;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 30px 80px rgba(0,0,0,0.4),
+    0 0 60px rgba(22,82,240,0.2);
+  animation: cardEntry 0.9s cubic-bezier(.22,1,.36,1) both;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.hero-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08) inset,
+    0 40px 100px rgba(0,0,0,0.5),
+    0 0 80px rgba(22,82,240,0.35);
 }
 
-.hero-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+@keyframes cardEntry {
+  from { opacity:0; transform:translateY(40px) scale(0.97); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+
+/* ── Title ── */
+.title-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.2rem;
 }
 
 h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #ffffff 0%, #a8c8ff 50%, #4d8fff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: shimmerText 4s linear infinite;
 }
 
+@keyframes shimmerText {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.title-underline {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #4d8fff, #a8c8ff, transparent);
+  margin-top: 6px;
+  animation: lineGrow 1.2s cubic-bezier(.22,1,.36,1) 0.4s both;
+  transform-origin: center;
+}
+@keyframes lineGrow {
+  from { transform: scaleX(0); opacity:0; }
+  to   { transform: scaleX(1); opacity:1; }
+}
+
+/* ── Tagline ── */
+.tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 700;
+  font-style: italic;
+  color: rgba(255,255,255,0.92);
+  letter-spacing: 0.3px;
+  margin-bottom: 0.9rem;
+  animation: fadeUp 0.8s ease 0.45s both;
+}
+
+/* ── Subtitle ── */
 .subtitle {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 2rem;
-    font-weight: 300;
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(168,200,255,0.75);
+  letter-spacing: 0.4px;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+  animation: fadeUp 0.8s ease 0.6s both;
 }
 
-.api-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
+
+
+/* ── Fade-up utility ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
 }
 
-.info-card {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    padding: 1.5rem;
-    border-radius: 15px;
-    transition: transform 0.3s ease;
-}
-
-.info-card:hover {
-    transform: scale(1.05);
-}
-
-.info-card h3 {
-    color: #4a5568;
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.info-card p {
-    color: #718096;
-    font-size: 0.9rem;
-}
-
-.status-badge {
-    display: inline-block;
-    background: #48bb78;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    margin-top: 1rem;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
-}
-
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-    }
-
-    .hero-card {
-        padding: 2rem;
-        margin: 1rem;
-    }
-
-    .container {
-        padding: 1rem;
-    }
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .hero-card { padding: 2.4rem 1.6rem; }
+  .api-info  { grid-template-columns: 1fr; }
 }
 </style>
-
 </head>
-
 <body>
 
+<!-- Floating orbs -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- Rising particles -->
+<div class="particles" id="particles"></div>
+
 <div class="container">
-    <div class="hero-card">
-        <h1>Kathie's Kitchen API</h1>
+
+  <!-- Hero Card -->
+  <div class="hero-card">
+    <div class="title-wrap">
+      <h1>Kathie's Kitchen API</h1>
+      <span class="title-underline"></span>
     </div>
+    <p class="tagline">Bringing Home Closer, One Bite at a Time</p>
+    <p class="subtitle">Authentic Filipino flavors, crafted with love and delivered fresh to your doorstep.</p>
+  </div>
+
 </div>
+
+<script>
+// Generate rising particles
+const container = document.getElementById('particles');
+for (let i = 0; i < 40; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.cssText = `
+    left: ${Math.random() * 100}%;
+    width: ${Math.random() * 3 + 2}px;
+    height: ${Math.random() * 3 + 2}px;
+    animation-duration: ${Math.random() * 10 + 8}s;
+    animation-delay: ${Math.random() * 10}s;
+  `;
+  container.appendChild(p);
+}
+</script>
 
 </body>
 </html>

@@ -42,16 +42,24 @@
                   <input v-model.number="form.price" type="number" min="0" step="0.01" required class="flex-1 px-3 py-2 border border-[#D3DDFF] rounded-lg focus:ring-2 focus:ring-[#20437B]/30 outline-none" placeholder="0" />
                 </div>
               </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Image Path</label>
+                <input
+                  v-model="form.imageUrl"
+                  type="text"
+                  class="w-full px-3 py-2 border border-[#D3DDFF] rounded-lg focus:ring-2 focus:ring-[#20437B]/30 outline-none"
+                  placeholder="/images/products/..."
+                />
+              </div>
             </div>
-            <!-- Right: Upload Image (circular) -->
+            <!-- Right: Preview Image (circular) -->
             <div class="flex flex-col items-center justify-center shrink-0">
               <AdminProductImage 
                 :src="form.imageUrl" 
                 :alt="form.name" 
-                mode="upload"
-                @update:src="form.imageUrl = $event"
+                mode="circular-display"
               />
-              <p class="text-xs text-gray-400 mt-2 text-center">or paste URL in edit</p>
+              <p class="text-xs text-gray-400 mt-2 text-center">Paste an image path (like Category)</p>
             </div>
           </div>
           <div class="flex justify-end gap-2 pt-6 mt-6 border-t border-[#D3DDFF]">

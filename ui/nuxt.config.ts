@@ -32,4 +32,10 @@ export default defineNuxtConfig({
       ]
     }
   },
+  runtimeConfig: {
+    public: {
+      // Adjust this to match your Django backend URL (where `python manage.py runserver` is running)
+      apiBase: process.env.NUXT_PUBLIC_API_BASE || 'http://localhost:8000/api',
+    },
+  },
 })

@@ -52,7 +52,7 @@ import type { ProductItem, CategoryItem } from '~/types/catalog'
 
 definePageMeta({ layout: 'admin' })
 
-const { products, addProduct, updateProduct, deleteProduct, nextProductId } = useProductData()
+const { products, refresh, createProduct, updateProduct, deleteProduct, loading, error } = useAdminProductsApi()
 const { categories } = useCategoriesData()
 
 const searchQuery = ref('')
@@ -63,6 +63,10 @@ const perPage = 10
 const showAddModal = ref(false)
 const editingProduct = ref<ProductItem | null>(null)
 const viewingProduct = ref<ProductItem | null>(null)
+
+onMounted(() => {
+  refresh()
+})
 
 function closeModal() {
   showAddModal.value = false
@@ -88,36 +92,20 @@ function openEdit(product: ProductItem) {
   editingProduct.value = product
 }
 
-function saveProduct(productData: Partial<ProductItem>) {
+async function saveProduct(productData: Partial<ProductItem>) {
   if (editingProduct.value) {
-    updateProduct(editingProduct.value.id, productData)
+    await updateProduct(editingProduct.value.id, productData)
   } else {
-    const id = nextProductId()
-    addProduct({
-      id,
-      name: productData.name!,
-      brand: productData.brand ?? '',
-      category: productData.category ?? '',
-      imageUrl: productData.imageUrl || '/images/placeholder.png',
-      price: productData.price ?? 0,
-      currency: productData.currency ?? 'R',
-      rating: productData.rating,
-      isNew: productData.isNew ?? true,
-      isSale: productData.isSale ?? false,
-      inStock: productData.inStock ?? true,
-      defaultQuantity: productData.defaultQuantity ?? 1,
-      stockCount: productData.stockCount,
-      description: productData.description
-    })
+    await createProduct(productData)
   }
   closeModal()
   if (!editingProduct.value) currentPage.value = Math.max(1, totalPages.value)
 }
 
-function confirmDelete(product: ProductItem) {
+async function confirmDelete(product: ProductItem) {
   if (!import.meta.client) return
   if (confirm(`Delete "${product.name}"? This will remove it from the list.`)) {
-    deleteProduct(product.id)
+    await deleteProduct(product.id)
     const total = totalPages.value
     if (currentPage.value > total) currentPage.value = Math.max(1, total)
   }
