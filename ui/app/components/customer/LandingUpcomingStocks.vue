@@ -84,11 +84,11 @@
                     {{ p.productFlavor || 'New Arrival' }}
                   </p>
                   <p class="text-[10.5px] font-normal text-[#6B7F95] m-0 leading-[1.5] line-clamp-2">
-                    {{ p.productDescription || 'Stay tuned — this product is arriving soon to our shelves.' }}
+                    {{ p.description || 'Stay tuned — this product is arriving soon to our shelves.' }}
                   </p>
                   <div class="flex items-center justify-between mt-0.5">
                     <span class="text-[10px] font-medium tracking-[0.06em] uppercase text-[#0F76D3]">
-                      {{ p.categoryName || 'Upcoming' }}
+                      Upcoming
                     </span>
                   </div>
                 </div>

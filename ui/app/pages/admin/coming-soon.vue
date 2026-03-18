@@ -58,7 +58,7 @@
                     :src="item.productImage"
                     :alt="item.productBrand + ' ' + item.productFlavor"
                     class="w-full h-full object-contain"
-                    @error="(e) => (e.currentTarget!.style.display = 'none')"
+                    @error="(e) => (e.target as HTMLImageElement).style.display = 'none'"
                   >
                   <span v-else class="text-gray-400 text-xs">No img</span>
                 </div>

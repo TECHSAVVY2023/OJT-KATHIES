@@ -7,7 +7,7 @@ export interface ProductItem {
   variant?: string
   imageUrl: string
   /** Optional extra images for detail page gallery */
-  images?: string[]
+  images?: readonly string[]
   price: number
   currency: string
   rating?: number

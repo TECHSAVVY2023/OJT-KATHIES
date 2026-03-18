@@ -28,4 +28,14 @@
 
 <script setup lang="ts">
 // Components are now in app/components/
+
+function onSubmit(formData: { username: string; phone: string; email: string; password: string }) {
+  console.log('Signup form submitted:', formData)
+  // TODO: Implement signup logic here
+}
+
+function signUpWithGoogle() {
+  console.log('Google signup requested')
+  // TODO: Implement Google OAuth signup here
+}
 </script>
